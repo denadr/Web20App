@@ -16,12 +16,20 @@ function spotifySearch(type,searchQuery,numOfResults){
 		},
 		success : function(response)
 		{
-			//alert(JSON.stringify(response));
-			alert(response.albums.items[0].uri);
-//			for (var n = 0; n < numOfResults; n++){
-//				var uri = "https://embed.spotify.com/?uri="+response.tracks.items[n].uri;					
-//				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
-//			}
+			for (var n = 0; n < numOfResults; n++){
+				switch (type){
+					case "track":
+						var uri = "https://embed.spotify.com/?uri="+response.tracks.items[n].uri;
+						break;
+					case "album":
+						var uri = "https://embed.spotify.com/?uri="+response.albums.items[n].uri;
+						break;
+					case "artist":
+						var uri = "https://embed.spotify.com/?uri="+response.artists.items[n].uri;
+						break;
+				}
+				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
+			}
 		}
 	});
 }
