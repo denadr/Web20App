@@ -16,11 +16,12 @@ function spotifySearch(type,searchQuery,numOfResults){
 		},
 		success : function(response)
 		{
-			alert(response.tracks.items[0].uri);
-			for (var n = 0; n < numOfResults; n++){
-				var uri = "https://embed.spotify.com/?uri="+response.tracks.items[n].uri;					
-				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
-			}
+			//alert(JSON.stringify(response));
+			alert(response.albums.items[0].uri);
+//			for (var n = 0; n < numOfResults; n++){
+//				var uri = "https://embed.spotify.com/?uri="+response.tracks.items[n].uri;					
+//				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
+//			}
 		}
 	});
 }
