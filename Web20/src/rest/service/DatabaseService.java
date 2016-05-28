@@ -34,7 +34,7 @@ public class DatabaseService
             
             ResultSet resultSet = statement.executeQuery("SELECT * FROM [dbo].[User]");
             
-            String json = "{ \"user\" : ";
+            String json = "{ \"testuser\" : ";
             if (resultSet.next()) 
             {
             	json += (new Gson()).toJson(new User(resultSet.getInt("Id"), resultSet.getString("Username"), resultSet.getString("Email")));
@@ -75,10 +75,7 @@ public class DatabaseService
 			database = new Database();
 			user = database.login(username, password);
 		}
-		catch (Exception e)
-		{
-			
-		}
+		catch (Exception e) { } // Don't care, this function will be deleted
 		finally
 		{
 			if (database != null)
@@ -86,7 +83,7 @@ public class DatabaseService
 				database.close();
 			}
 		}
-		return "{ \"userX\" : " + (user == null ? "failure" : (new Gson()).toJson(user)) + " }";
+		return "{ \"user\" : " + (user == null ? "\"failure\"" : (new Gson()).toJson(user)) + " }";
 	}
 	
 	@GET
