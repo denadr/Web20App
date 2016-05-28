@@ -6,14 +6,64 @@
 
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
 <script src="database.js"></script>
-<script src="databaseTest.js"></script>
 
 </head>
 <body>
 
 	<h1>DB Test</h1>
-	<button type="button" onclick="test_click()">Test DB</button>		
-	<p id="output"></p>	
+	<button type="button" onclick="testDb()">Test</button>		
+
+	<!-- User tests -->
+	<h1>User Tests</h1>
+	
+	<h2>Register User</h2>
+	<input type="text" id="email" value="email"/>
+	<input type="text" id="registerName" value="username"/>
+	<input type="text" id="registerPassword" value="password"/>
+	<button type="button" onclick="register(email.value, registerName.value, registerPassword.value)">Register</button>
+	
+	<h2>Login User</h2>
+	<input type="text" id="loginName" value="username"/>
+	<input type="text" id="loginPassword" value="password"/>
+	<button type="button" onclick="login(loginName.value, loginPassword.value)">Login</button>
+	
+	<h2>Delete User</h2>
+	<input type="text" id="deleteUserId" value="userId"/>
+	<button type="button" onclick="deleteUser(deleteUserId.value)">Delete User</button>
+	
+	<!-- Playlist tests -->
+	<h1>Playlist Tests</h1>
+	
+	<h2>Add Playlist</h2>
+	<input type="text" id="addUserId" value="userId"/>
+	<input type="text" id="playlistName" value="playlistName"/>
+	<button type="button" onclick="addPlaylist(addUserId.value, playlistName.value)">Add Playlist</button>
+	
+	<h2>Delete Playlist</h2>
+	<input type="text" id="deletePlaylistId" value="playlistId"/>
+	<button type="button" onclick="deletePlaylist(deletePlaylistId.value)">Delete Playlist</button>
+	
+	<h2>Get Playlists</h2>
+	<input type="text" id="getUserId" value="userId"/>
+	<button type="button" onclick="getPlaylists(getUserId.value)">Get Playlists</button>
+	
+	<h2>Get Playlist</h2>
+	<input type="text" id="getPlaylistId" value="playlistId"/>
+	<button type="button" onclick="getPlaylist(getPlaylistId.value)">Get Playlist</button>
+	
+	<!-- Title tests -->
+	<h1>Title Tests</h1>
+	
+	<h2>Add Title</h2>
+	<input type="text" id="addPlaylistId" value="playlistId"/>
+	<input type="text" id="description" value="description"/>
+	<input type="text" id="url" value="url"/>
+	<button type="button" onclick="addTitle(addPlaylistId.value, description.value, url.value)">Add Title</button>
+	
+	<h2>Delete Title</h2>
+	<input type="text" id="deletePlaylistId2" value="playlistId"/>
+	<input type="text" id="titleId" value="titleId"/>
+	<button type="button" onclick="deleteTitle(deletePlaylistId2.value, titleId.value)">Delete Title</button>
 	
 </body>
 </html>
