@@ -20,7 +20,7 @@ public class Database
 												"loginTimeout=30;";
 	
 	private final String userTable 		      = "[dbo].[User]";
-	private final String playlistTable 		  = "[dbo].[Playlist]";
+	//private final String playlistTable 		  = "[dbo].[Playlist]";
 	private final String titleTable 		  = "[dbo].[Title]";
 	private final String playlistToTitleTable = "[dbo].[PlaylistToTitle]";
 	
@@ -138,19 +138,6 @@ public class Database
 	}
 	
 	// ===== Preparation functions for Title =====
-	
-	private void addTitle(String description, String url) throws Exception
-	{
-        ResultSet results = sqlStatement.executeQuery(String.format(
-        		"SELECT Id FROM %s WHERE URL = '%s' AND Description = '%s'", titleTable, url, description));
-        boolean titleAlreadyExists = results.next();
-        results.close();
-        
-        if (!titleAlreadyExists)
-        {
-        	
-        }
-    }
 	
 	private void addTitle(int playlistId, int titleId) throws Exception
 	{
