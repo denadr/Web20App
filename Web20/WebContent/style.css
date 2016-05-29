@@ -13,7 +13,7 @@ body {
 	padding: 0px;
 	line-height: 1.5em;
 	width: 90%;
-	max-width: 800px;
+	max-width: 1200px;
 	min-width: 250px;
 	
 	padding: 5%;
@@ -23,6 +23,28 @@ body {
 img {
 	border-width: 0px;
 }
+
+h1{
+	margin: 0px auto;
+	text-align: center;
+    vertical-align: middle;
+    padding: 50px;
+    
+    color: #2b303b;
+}
+
+.main{
+	background-image: url("images/headphones.png");
+	background-color: #cccccc;
+	
+	background-size: 100%;
+    background-repeat: no-repeat;
+	
+	margin: 5% 0%;
+	padding-bottom: 15%;
+}
+
+/* Search Bar */
 
 .search_bar{
 	margin: 0px auto;
@@ -36,13 +58,13 @@ img {
   	border-radius: 10px;
 }
 
-.search_bar label{
+.search_bar_label{
 	font-size: 15pt;
 	color: #63717f;
 	padding: 18px;
 }
 
-.search_bar input{
+.search_bar_input{
 	width: 300px;
 	height: 50px;
 	
@@ -60,16 +82,18 @@ img {
 	transition: background .55s ease;
 }
 
-.search_icon{
+.search_bar_button{
 	width: 50px;
 	height: 50px;
 	background: #2b303b;
 	border: none;
 }
 
-.search_icon img{
+.search_bar_button img{
 	height: 30px;
 }
+
+/* Login Bar */
 
 .menu_bar{
 	width: 150px;
@@ -82,19 +106,8 @@ img {
   	border-radius: 10px;
 }
 
-.menu_bar .menu_icon{
-	width: 30px;
-	height: 30px;
-	background: #2b303b;
-	border: none;
-}
-
-.menu_bar .menu_icon img{
-	width: 30px;
-}
-
-.menu_bar .konto_button {
-	width: 70px;
+.konto_button {
+	width: 100px;
 	height: 30px;
 	background: #2b303b;
 	border: none;
@@ -104,29 +117,23 @@ img {
 	padding: 5px, 5px;
 }
 
+/* Supplier Bar */
+
 .supplier_bar{
 	margin: 0px auto;
 	width: 80%;
-	padding-top: 20%;
+	padding-top: 5%;
     vertical-align: middle;
 }
 
-.supplier_bar .table_header td{
-	width: 50%;
-	border: 1px solid black;
-	text-align: center;
-}
-
-h1{
-	margin: 0px auto;
-	text-align: center;
-    vertical-align: middle;
-    padding: 50px;
-}
-
-header table{
+.table_header{
 	margin: 1em 0em;
 	font-size: 1,5em;
+}
+
+.table_header td{
+	width: 50%;
+	border: 1px solid black;
 	text-align: center;
 }
 

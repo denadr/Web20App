@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Moodle Website
+		<!-- Ultimate Music Search Engine Website
 			 Author: Lars Nonnemann
 		-->
 		<meta charset="UTF-8" />
-		<title> Ultimate Music Finder </title>
+		<title> Ultimate Music Search Engine </title>
 		
 		<script src="http://code.jquery.com/jquery-2.1.3.js"></script>
-		<script src="/interaction/hamburgler.js"></script>
+		<script src="interaction/hamburgler.js"></script>
 		
 		<link href="style.css" rel="stylesheet" type="text/css" />
-		<link href="/interaction/hamburgler.css" rel="stylesheet" />
+		<link href="interaction/hamburgler.css" rel="stylesheet" />
 	</head>
-	
-	<div class="mobilenav">
-    	<li><a href="#">Never</a></li>
-    	<li><a href="#">Gonna</a></li>
-    	<li><a href="#">Give</a></li>
-    	<li><a href="#">You</a></li>
-    	<li><a href="#">Up</a></li>
-  	</div>
-  
- 	<a href="javascript:void(0)" class="icon">
-    	<div class="hamburger">
-    		<div class="menui top-menu"></div>
-    		<div class="menui mid-menu"></div>
-    		<div class="menui bottom-menu"></div>
-    	</div>
-  	</a>
   
 	<body>
 		<header>
 			<table class="menu_bar">
 				<tr>
-					<td width="10%"><button class="menu_icon" type="submit"><img src="images/menu_icon.png" alt="submit"/></button></td>
-					<td width="20%"><input class="konto_button" id="konto_button" type="submit" value="Sign in"></td>
+					<td class="menu_bar_button" width="10%">
+ 						<a href="javascript:void(0)" class="icon">
+    						<div class="menui top-menu"></div>
+    						<div class="menui mid-menu"></div>
+    						<div class="menui bottom-menu"></div>
+  						</a>
+  					</td>
+					<td width="90%"><input class="konto_button" href="#" type="submit" value="Sign in" /></td>
+				</tr>
+				<tr>
+					<td width="10%" colspan="2" class="mobilenav_container">
+						<div class="mobilenav">
+    						<li><a href="#">Login</a></li>
+    						<li><a href="#">Register</a></li>
+  						</div>
+					</td>
 				</tr>
 			</table>
 		</header>
 		
-		<h1>Geilste Website EVER!</h1>
+		<div class="main">
+			<h1 class="home_heading">Ultimate Music Search Engine</h1>
 		
-		<table class="search_bar">
-			<tr>
-				<td><label>Suche: </label></td>
-				<td><input class="search" type="search" placeholder="Titel hier eingeben ..."/></td>
-				<td><button class="search_icon" type="submit"><img src="images/search_icon.png" alt="submit"/></button></td>
-			</tr>
-		</table>
+			<table class="search_bar">
+				<tr>
+					<td><label class="search_bar_label">Suche: </label></td>
+					<td><input class="search_bar_input" type="search" placeholder="Titel hier eingeben ..."/></td>
+					<td><button class="search_bar_button" type="submit"><img src="images/search_icon.png" alt="submit"/></button></td>
+				</tr>
+			</table>
+		</div>
 		
 		<table class="supplier_bar">
 			<tr class="table_header">
