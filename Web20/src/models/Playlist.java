@@ -1,7 +1,5 @@
 package models;
 
-import com.google.gson.Gson;
-
 public class Playlist extends DatabaseObject
 {
 	private int userId;
@@ -22,11 +20,5 @@ public class Playlist extends DatabaseObject
 	public String getName()
 	{
 		return name;
-	}
-	
-	@Override
-	public String toJsonString()
-	{
-		return "{ \"playlist\" : " + (new Gson()).toJson(this) + " }";
 	}
 }

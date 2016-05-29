@@ -8,9 +8,4 @@ public abstract class DatabaseObject
 	{
 		return id;
 	}
-	
-	public String toJsonString()
-	{
-		return null;
-	}
 }

@@ -1,10 +1,7 @@
 package models;
 
-import com.google.gson.Gson;
-
-public class Title
+public class Title extends DatabaseObject
 {
-	private int id;
 	private String description;
 	private String url;
 	
@@ -15,11 +12,6 @@ public class Title
 		this.url = url;
 	}
 
-	public int getId()
-	{
-		return id;
-	}
-
 	public String getDescription()
 	{
 		return description;
@@ -28,10 +20,5 @@ public class Title
 	public String getUrl()
 	{
 		return url;
-	}
-	
-	public String toJsonString()
-	{
-		return "{ \"title\" : " + (new Gson()).toJson(this) + " }";
 	}
 }

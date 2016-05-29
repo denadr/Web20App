@@ -60,7 +60,22 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String register(@PathParam("email") String email, @PathParam("username") String username, @PathParam("password") String password)
 	{
-		return "{\"register\":{\"email\":\"" + email + "\",\"username\":\"" + username + "\",\"password\":\"" + password + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.register(email, username, password) ? "success" : "failure";
+		}
+		catch (Exception e) { result += "exception"; } // Don't care, this function will be deleted
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 
 	@GET
@@ -91,24 +106,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deleteUser(@PathParam("id") String id)
 	{
-		return "{\"deleteUser\":{\"id\":\"" + id + "\"}}";
-//		Database database = null;
-//		try
-//		{
-//			database = new Database();
-//			database.deleteUser(id);
-//        } 
-//		catch (Exception e) 
-//		{
-//            
-//        }
-//		finally
-//		{
-//			if (database != null)
-//			{
-//				database.close();
-//			}
-//		}
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.deleteUser(Integer.parseInt(id)) ? "success" : "failure"; 
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result += "exception";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 	
 	// ===== Services for Playlist(s) =====
@@ -118,7 +135,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addPlaylist(@PathParam("userId") String userId, @PathParam("playlistName") String playlistName)
 	{
-		return "{\"addPlaylist\":{\"userId\":\"" + userId + "\",\"playlistName\":\"" + playlistName + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.addPlaylist(Integer.parseInt(userId), playlistName) ? "success" : "failure"; 
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result += "exception";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 
 	@GET
@@ -126,7 +162,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deletePlaylist(@PathParam("playlistId") String playlistId)
 	{
-		return "{\"deletePlaylist\":{\"playlistId\":\"" + playlistId + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.deletePlaylist(Integer.parseInt(playlistId)) ? "success" : "failure"; 
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result += "exception";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 
 	@GET
@@ -134,7 +189,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPlaylists(@PathParam("userId") String userId)
 	{
-		return "{\"getPlaylists\":{\"userId\":\"" + userId + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"failure\"}";
+		try
+		{
+			database = new Database();
+			result = database.getPlaylists(Integer.parseInt(userId)).toJsonString();
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"exception\"}";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result;
 	}
 
 	@GET
@@ -142,7 +216,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getPlaylist(@PathParam("playlistId") String playlistId)
 	{
-		return "{\"getPlaylist\":{\"playlistId\":\"" + playlistId + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"failure\"}";
+		try
+		{
+			database = new Database();
+			result = database.getPlaylist(Integer.parseInt(playlistId)).toJsonString();
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"exception\"}";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result;
 	}
 	
 	// ===== Services for Title =====
@@ -152,7 +245,26 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String addTitle(@PathParam("playlistId") String playlistId, @PathParam("description") String description, @PathParam("url") String url)
 	{
-		return "{\"addTitle\":{\"playlistId\":\"" + playlistId + "\",\"description\":\"" + description + "\",\"url\":\"" + url + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.addTitle(Integer.parseInt(playlistId), description, url) ? "success" : "failure"; 
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result += "exception";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 
 	@GET
@@ -160,6 +272,25 @@ public class DatabaseService
 	@Produces(MediaType.APPLICATION_JSON)
 	public String deleteTitle(@PathParam("playlistId") String playlistId, @PathParam("titleId") String titleId)
 	{
-		return "{\"deleteTitle\":{\"playlistId\":\"" + playlistId + "\",\"titleId\":\"" + titleId + "\"}}";
+		Database database = null;
+		String result = "{\"message\":\"";
+		try
+		{
+			database = new Database();
+			result += database.deleteTitle(Integer.parseInt(playlistId), Integer.parseInt(titleId)) ? "success" : "failure"; 
+        } 
+		catch (Exception e) 
+		{
+			// TODO: Detailed error handling
+			result += "exception";
+        }
+		finally
+		{
+			if (database != null)
+			{
+				database.close();
+			}
+		}
+		return result + "\"}";
 	}
 }
