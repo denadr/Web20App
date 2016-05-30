@@ -27,7 +27,7 @@ public class Database
 	private Connection serverConnection;
 	private Statement sqlStatement;
 	
-	public Database() throws Exception
+	public Database() throws ClassNotFoundException, SQLException
 	{
 		// Load driver manager class for MSSQL server first!
 		Class.forName(sqlServerDriverClass);
@@ -59,7 +59,7 @@ public class Database
 	
 	// ===== Preparation functions for Users =====
 	
-	public User login(String username, String password) throws Exception
+	public User login(String username, String password) throws SQLException 
 	{
         User user = null;
 
@@ -75,7 +75,7 @@ public class Database
         return user;
 	}
 	
-	public boolean register(String email, String username, String password) throws Exception
+	public boolean register(String email, String username, String password) throws SQLException 
 	{
 		// Insert new user to user table with requested username, email and password
 		// only, if no user with that username or email exists already.
@@ -87,7 +87,7 @@ public class Database
 				userTable, username, email, userTable, username, password, email));
 	}
 	
-	public boolean deleteUser(int userId) throws Exception
+	public boolean deleteUser(int userId) throws SQLException
 	{
 		// Get all playlistIds corresponding to userId
 		ArrayList<Integer> playlistIds = new ArrayList<Integer>(); 
@@ -112,7 +112,7 @@ public class Database
 	
 	// ===== Preparation functions for Playlist(s) =====
 
-	public boolean addPlaylist(int userId, String playlistName) throws Exception
+	public boolean addPlaylist(int userId, String playlistName) throws SQLException
 	{
 		// Insert new playlist for user with the requested playlistName only,
 		// if no playlist with that userId and playlistName exists already.
@@ -124,7 +124,7 @@ public class Database
     			playlistTable, userId, playlistName, playlistTable, userId, playlistName));
 	}
 	
-	public boolean deletePlaylist(int playlistId) throws Exception
+	public boolean deletePlaylist(int playlistId) throws SQLException
 	{
 		// Get all associated titleIds
 		ArrayList<Integer> titleIds = new ArrayList<Integer>();
@@ -147,7 +147,7 @@ public class Database
         		"DELETE FROM %s WHERE Id = %d", playlistTable, playlistId));
 	}
 	
-	public Playlists getPlaylists(int userId) throws Exception
+	public Playlists getPlaylists(int userId) throws SQLException
 	{
 		Playlists playlists = new Playlists();
 		
@@ -162,7 +162,7 @@ public class Database
         return playlists;
 	}
 	
-	public Titles getPlaylist(int playlistId) throws Exception
+	public Titles getPlaylist(int playlistId) throws SQLException
 	{
 		ArrayList<Integer> titleIds = new ArrayList<Integer>();
 		
@@ -179,7 +179,7 @@ public class Database
 	
 	// ===== Preparation functions for Title =====
 	
-	public boolean addTitle(int playlistId, String description, String url) throws Exception
+	public boolean addTitle(int playlistId, String description, String url) throws SQLException
 	{
 		// Insert a new title to title table only, if no title with that description and url exists already.
 		sqlStatement.executeUpdate(String.format(
@@ -198,7 +198,7 @@ public class Database
         return false;
 	}
 
-	private boolean addTitle(int playlistId, int titleId) throws Exception
+	private boolean addTitle(int playlistId, int titleId) throws SQLException
 	{
 		// Insert a new association to the PlaylistToTitle table with the requested 
 		// playlistId and titleId only, if no association between them exists already.
@@ -210,7 +210,7 @@ public class Database
     			playlistToTitleTable, playlistId, titleId, playlistToTitleTable, playlistId, titleId));
 	}
 	
-	private int determineTitleId(String description, String url) throws Exception
+	private int determineTitleId(String description, String url) throws SQLException
 	{
 		// Get the title table entry with the requested description and url.
 		ResultSet results = sqlStatement.executeQuery(String.format(
@@ -226,7 +226,7 @@ public class Database
         return id;
 	}
 
-	public boolean deleteTitle(int playlistId, int titleId) throws Exception
+	public boolean deleteTitle(int playlistId, int titleId) throws SQLException
 	{
 		// Delete title from playlist by removing the association in the PlaylistToTitle table.
         boolean success = 1 == sqlStatement.executeUpdate(String.format(
@@ -243,7 +243,7 @@ public class Database
         return success;
 	}
 	
-	private Titles getTitles(ArrayList<Integer> ids) throws Exception
+	private Titles getTitles(ArrayList<Integer> ids) throws SQLException
 	{
 		Titles titles = new Titles();
 		for (Integer id : ids)
@@ -257,7 +257,7 @@ public class Database
 		return titles;
 	}
 	
-	private Title getTitle(Integer id) throws Exception
+	private Title getTitle(Integer id) throws SQLException
 	{
 		Title title = null;
 		

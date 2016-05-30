@@ -3,12 +3,12 @@ package rest.service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -59,7 +59,7 @@ public class DatabaseService
 	@Path("/user/register/{email}/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String register(@PathParam("email") String email, @PathParam("username") String username, @PathParam("password") String password)
-	{
+	{ // This function will be deleted.
 		Database database = null;
 		String result = "{\"message\":\"";
 		try
@@ -67,7 +67,14 @@ public class DatabaseService
 			database = new Database();
 			result += database.register(email, username, password) ? "success" : "failure";
 		}
-		catch (Exception e) { result += "exception"; } // Don't care, this function will be deleted
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
+		{ 
+			result += "ClassNotFoundException";
+		}
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{ 
+			result += "SQLException";
+		}
 		finally
 		{
 			if (database != null)
@@ -82,15 +89,27 @@ public class DatabaseService
 	@Path("/user/login/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String login(@PathParam("username") String username, @PathParam("password") String password)
-	{
+	{ // This function will be deleted.
 		Database database = null;
 		User user = null;
+		String result = "{\"message\":\"failed\"}";
 		try
 		{
 			database = new Database();
 			user = database.login(username, password);
+			if (user != null)
+			{
+				result = "{ \"user\" : " + (new Gson()).toJson(user) + " }";
+			}
 		}
-		catch (Exception e) { } // Don't care, this function will be deleted
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
+		{
+			result = "{\"message\":\"ClassNotFoundException\"}";
+		}
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			result = "{\"message\":\"SQLException\"}";
+		}
 		finally
 		{
 			if (database != null)
@@ -98,7 +117,7 @@ public class DatabaseService
 				database.close();
 			}
 		}
-		return "{ \"user\" : " + (user == null ? "\"failure\"" : (new Gson()).toJson(user)) + " }";
+		return result;
 	}
 	
 	@GET
@@ -113,10 +132,20 @@ public class DatabaseService
 			database = new Database();
 			result += database.deleteUser(Integer.parseInt(id)) ? "success" : "failure"; 
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "exception";
+			result += "ClassNotFoundException";
+        } 
+		catch (NumberFormatException e) // Parsing of id failed.
+		{
+			// TODO: Detailed error handling
+			result += "NumberFormatException";
+        }
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result += "SQLException";
         }
 		finally
 		{
@@ -142,10 +171,20 @@ public class DatabaseService
 			database = new Database();
 			result += database.addPlaylist(Integer.parseInt(userId), playlistName) ? "success" : "failure"; 
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "exception";
+			result += "ClassNotFoundException";
+        }  
+		catch (NumberFormatException e) // Parsing of userId failed.
+		{
+			// TODO: Detailed error handling
+			result += "NumberFormatException";
+        } 
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result += "SQLException";
         }
 		finally
 		{
@@ -169,10 +208,20 @@ public class DatabaseService
 			database = new Database();
 			result += database.deletePlaylist(Integer.parseInt(playlistId)) ? "success" : "failure"; 
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "exception";
+			result += "ClassNotFoundException";
+        }  
+		catch (NumberFormatException e) // Parsing of playlistId failed.
+		{
+			// TODO: Detailed error handling
+			result += "NumberFormatException";
+        } 
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result += "SQLException";
         }
 		finally
 		{
@@ -196,10 +245,20 @@ public class DatabaseService
 			database = new Database();
 			result = database.getPlaylists(Integer.parseInt(userId)).toJsonString();
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result = "{\"message\":\"exception\"}";
+			result = "{\"message\":\"ClassNotFoundException\"}";
+        } 
+		catch (NumberFormatException e) // Parsing of userId failed.
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"NumberFormatException\"}";
+        } 
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"SQLException\"}";
         }
 		finally
 		{
@@ -223,10 +282,20 @@ public class DatabaseService
 			database = new Database();
 			result = database.getPlaylist(Integer.parseInt(playlistId)).toJsonString();
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result = "{\"message\":\"exception\"}";
+			result = "{\"message\":\"ClassNotFoundException\"}";
+        } 
+		catch (NumberFormatException e) // Parsing of playlistId failed.
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"NumberFormatException\"}";
+        }
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"SQLException\"}";
         }
 		finally
 		{
@@ -252,10 +321,20 @@ public class DatabaseService
 			database = new Database();
 			result += database.addTitle(Integer.parseInt(playlistId), description, url) ? "success" : "failure"; 
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "exception";
+			result += "ClassNotFoundException";
+        } 
+		catch (NumberFormatException e) // Parsing of playlistId failed.
+		{
+			// TODO: Detailed error handling
+			result += "NumberFormatException";
+        }
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result += "SQLException";
         }
 		finally
 		{
@@ -279,10 +358,20 @@ public class DatabaseService
 			database = new Database();
 			result += database.deleteTitle(Integer.parseInt(playlistId), Integer.parseInt(titleId)) ? "success" : "failure"; 
         } 
-		catch (Exception e) 
+		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "exception";
+			result += "ClassNotFoundException";
+        }
+		catch (NumberFormatException e) // Parsing of playlistId or titleId failed.
+		{
+			// TODO: Detailed error handling
+			result += "NumberFormatException";
+        }
+		catch (SQLException e) // Some exception while accessing the SQL database.
+		{
+			// TODO: Detailed error handling
+			result += "SQLException";
         }
 		finally
 		{
