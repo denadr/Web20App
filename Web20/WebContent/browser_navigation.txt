@@ -1,0 +1,13 @@
+Schrittweise Anleitung zum Übergang im Browser
+
+1. home.html als Hauptseite mit der Suchanfrage
+
+2. login_overlay.html als Overlay über der Hauptseite, fall der Login Button oder einer der Menüpunkte angewählt wird
+
+3. reply.html als Rückgabeseite für die Suchergebnisse
+
+4. playlist.html zur Verwaltung der Playlist
+
+Note: Das ist nur eine grobe Struktur, die jeder Zeit erweitert werden kann.
+
+Zu jeder HTML Seite liegt eine CSS Datei mit den jeweiligen Style Rules vor. Momentan ist die CSS Datei nur die Homedatei, die im speziellen Fall überarbeitet werden kann.
