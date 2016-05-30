@@ -30,4 +30,3 @@ $(document).keydown(function(e) {
         $(".bottom-menu").removeClass("bottom-animate");
     }
 });
-
