@@ -34,7 +34,7 @@ h1{
 }
 
 .main{
-	background-image: url("Images/headphones.png");
+	background-image: url("../Images/headphones.png");
 	background-color: #cccccc;
 	
 	background-size: 100%;
