@@ -65,10 +65,15 @@ public class Database
 
         // Try to get user information (except of password) by requested username and password.
         ResultSet results = sqlStatement.executeQuery(String.format(
-        		"SELECT Id, Username, Email FROM %s WHERE Username = '%s' AND Password = '%s'", userTable, username, password));
+        		"SELECT Id, Username, Email, Password FROM %s WHERE Username = '%s'", userTable, username));
         if (results.next())
-        { // User with requested username and password found -> Login successful.
-        	user = new User(results.getInt("Id"), results.getString("Username"), results.getString("Email"));
+        { // User with requested username found -> Check password.
+        	String savedPassword = results.getString("Password");
+        	String salt = PasswordUtils.getSalt(savedPassword);
+        	if (savedPassword.equals(salt + PasswordUtils.encrypt(password)));
+        	{ // Password correct -> Login successful.
+        		user = new User(results.getInt("Id"), results.getString("Username"), results.getString("Email"));
+        	}
         }
         results.close();
 		
@@ -84,7 +89,7 @@ public class Database
 				"BEGIN " + 
 					"INSERT INTO %s (Username, Password, Email) VALUES('%s', '%s', '%s') " +
 				"END", 
-				userTable, username, email, userTable, username, password, email));
+				userTable, username, email, userTable, username, PasswordUtils.encrypt(password), email));
 	}
 	
 	public boolean deleteUser(int userId) throws SQLException
