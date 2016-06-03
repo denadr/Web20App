@@ -8,7 +8,10 @@
 		<title> Ultimate Music Search Engine </title>
 		
 		<script src="http://code.jquery.com/jquery-2.1.3.js"></script>
-		<script src="/Web20/Interaction/hamburgerMenu.js"></script>
+		<script src="/Web20/Interaction/hamburgerMenu.js"></script>	
+		<script src="/Web20/Scripts/MusicAPI/deezer.js"></script>	
+		<script src="/Web20/Scripts/MusicAPI/soundcloud.js"></script>	
+		<script src="/Web20/Scripts/MusicAPI/spotify.js"></script>
 		<script src="/Web20/CodeBehind/search.js"></script>
 		
 		<link href="/Web20/Styles/search.css" rel="stylesheet" />
@@ -50,8 +53,8 @@
 			<table class="search_bar">
 				<tr>
 					<td><label class="search_bar_label">Suche: </label></td>
-					<td><input class="search_bar_input" type="search" placeholder="Titel hier eingeben ..."/></td>
-					<td><button class="search_bar_button" type="submit"><img src="Images/search_icon.png" alt="Submit Button"/></button></td>
+					<td><input class="search_bar_input" id="searchQuery" type="search" placeholder="Titel hier eingeben ..."/></td>
+					<td><button class="search_bar_button" type="submit" onclick="search_button_click()"><img src="Images/search_icon.png" alt="Submit Button"/></button></td>
 				</tr>
 			</table>
 		</div>
