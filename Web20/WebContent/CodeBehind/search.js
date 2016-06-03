@@ -6,7 +6,10 @@ function search_button_click()
 	
 	// TODO: Call API functionality with data and update UI
 	alert("Search for " + query);
-//	deezerSearch('track', query, maxResults);
+	deezerSearch('track', query, maxResults, function (result)
+	{
+		alert(result);
+	});
 //	soundcloudSearch('tracks', query, maxResults);
 //	spotifySearch('track', query, maxResults);
 }
