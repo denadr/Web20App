@@ -1,0 +1,91 @@
+/* HAMBURGER ICON ANIMATED */
+.spotify-animate {
+	opacity: 0.8;    
+}
+.soundcloud-animate {
+    opacity: 0.8;
+}
+.deezer-animate {
+    opacity: 0.8;
+}
+
+/* HAMBURGER ICON */
+.spotify_result_button {
+    display: block;
+}
+.soundcloud_result_button {
+    display: block;
+}
+.deezer_result_button {
+    display: block;
+}
+
+/* HAMBURGER */
+.menui {
+    transition: 0.6s ease;
+    transition-timing-function: cubic-bezier(.75, 0, .29, 1.01);
+    margin-top: 6px;
+}
+
+.widgets_spotify {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_spotify li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_spotify li a {
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}
+
+.widgets_soundcloud {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_soundcloud li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_soundcloud li a {
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}
+
+.widgets_deezer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_deezer li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_deezer li a {
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}

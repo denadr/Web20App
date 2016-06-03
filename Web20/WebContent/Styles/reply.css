@@ -118,11 +118,37 @@ h1{
 
 /************ Supplier Bar ************/
 
-.reply_bar{
+.spotify_result_button {
 	margin: 10% auto;
 	width: 100%;
-    vertical-align: middle;
-    border: 1px solid black;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.soundcloud_result_button {
+	margin: 10% auto;
+	width: 100%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.deezer_result_button {
+	margin: 10% auto;
+	width: 100%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
 }
 
 /************ Footer Styles ************/
