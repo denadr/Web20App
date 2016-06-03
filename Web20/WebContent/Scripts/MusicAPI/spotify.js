@@ -5,8 +5,7 @@
  * 
  * Results: uris
  */
-function spotifySearch(type,searchQuery,numOfResults){
-	var result = "";
+function spotifySearch(type,searchQuery,numOfResults, callback){
 	$.ajax(
 	{
 		url : "https://api.spotify.com/v1/search",
@@ -17,6 +16,7 @@ function spotifySearch(type,searchQuery,numOfResults){
 		},
 		success : function(response)
 		{	
+			var result = "";
 			for (var n = 0; n < numOfResults; n++){
 				var uri="";
 				switch (type){
@@ -33,7 +33,7 @@ function spotifySearch(type,searchQuery,numOfResults){
 				result+=uri+"\t"
 //				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
 			}
+			callback(result);
 		}
 	});
-	return result;
 }

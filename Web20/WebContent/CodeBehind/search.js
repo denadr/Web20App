@@ -10,6 +10,12 @@ function search_button_click()
 	{
 		alert(result);
 	});
-//	soundcloudSearch('tracks', query, maxResults);
-//	spotifySearch('track', query, maxResults);
+	soundcloudSearch('tracks', query, maxResults, function (result)
+	{
+		alert(result);
+	});
+	spotifySearch('track', query, maxResults, function (result)
+	{
+		alert(result);
+	});
 }

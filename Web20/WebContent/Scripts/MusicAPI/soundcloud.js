@@ -5,14 +5,14 @@
  * 
  * Results: uris
  */
-function soundcloudSearch(type,searchQuery,numOfResults){
-	var result = "";
+function soundcloudSearch(type,searchQuery,numOfResults, callback){
 	
 	SC.initialize({
 		client_id: 'c202b469a633a7a5b15c9e10b5272b78'
 	});
 	
 	SC.get('/'+type, {q: searchQuery}).then(function(tracks) {	
+		var result = "";
 		alert(tracks[0].id);
 		var uri="";
 		for (var i=0; i<numOfResults ; i++){
@@ -20,6 +20,6 @@ function soundcloudSearch(type,searchQuery,numOfResults){
 //			$("h4").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>')
 			result+=uri+"\t";
 		}
+		callback(result);
 	});
-	return result;
 }
