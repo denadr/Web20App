@@ -1,65 +1,81 @@
-var songSaved = true; //ist der Song schon in einer Playlist?
+var songSaved = false; //ist der Song schon in einer Playlist? - muss eine Funktion sein, die abfragt ob SongID schon in Liste
 
+//React Elemente
 var SongList = React.createClass({
   render: function() {
+	var rows = [], i = 0, len = 10;
+	while (++i <= len) rows.push(i);
+	  
     return (
       <div class="songList">
-        <WidgetBox />
+      {rows.map(function (i) {
+	        return (<WidgetBox songid={i} />);
+	  })}
       </div>
     );
   }
 });
 
 var AddButton = React.createClass({
-	render: function() {
+
+	render: function() {	
 		return ( 
-			<div class="addButton">AddButton</div>
+			<a href="#" class="addButton">AddButton</a>
 		);
 	}
 });
 
 var DeleteButton = React.createClass({
+	
 	render: function() {
 		return ( 
-			<div class="DeleteButton">DeleteButton</div>
+			<a href="#" class="DeleteButton">DeleteButton</a>
 		);
 	}
 });
 
-var WidgetBox = React.createClass({
-	render: function() {
-		var Button;
-		if (songSaved) {
-		  Button = <DeleteButton />;
-		} else {
-		  Button = <AddButton />;
-		}
+var Button = React.createClass({
+	getInitialState: function() {
+		return {
+			saved: false
+		};
+	},
+	
+	handleClick: function(evt) {		
+		this.setState({
+			saved: !this.state.saved
+		});
 		
+		if(this.state.saved) {
+			console.log("geloescht") // Funktion um Song aus Liste zu loeschen
+		} else {
+			console.log("hinzugefuegt") // Funktion um Song in Liste zu speichern
+		}
+				
+	},
+	
+	
+	render: function() {
+		var button = this.state.saved ? <DeleteButton /> : <AddButton />;
+		return (
+				<div class="button" onClick={this.handleClick}>{this.props.songid}, {button}</div>
+		);
+	}
+})
+
+var WidgetBox = React.createClass({
+	
+	render: function() {
+			
 		return ( 
 			<div class="widgetBoxWithAddButton">
-			Widget will be located here
-			{Button}
+			Widget fuer Song <Button songid={this.props.songid}/>
 			</div>
 		);
 	}
 });
 
-var TestLoop = React.createClass({
-	render: function () {
-	  var rows = [], i = 0, len = 10;
-	  while (++i <= len) rows.push(i);
-	
-	  return (
-	    <tbody>
-	      {rows.map(function (i) {
-	        return <AddButton />;
-	      })}
-	    </tbody>
-	  );
-	}
-});
-
 ReactDOM.render(
-    <SongList />,
+	<SongList />,
     document.getElementById('example')
 );
