@@ -116,7 +116,18 @@ h1{
 	padding: 5px, 5px;
 }
 
-/************ Supplier Bar ************/
+/************ Reply Bar ************/
+
+.reply_bar{
+	margin: 10% auto;
+	width: 100%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
 
 .spotify_result_button {
 	margin: 10% auto;

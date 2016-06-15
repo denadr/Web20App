@@ -117,13 +117,17 @@ h1{
 	padding: 5px, 5px;
 }
 
-/* Supplier Bar */
+/* Playlist Bar */
 
-.supplier_bar{
+.playlist{
 	margin: 0px auto;
 	width: 80%;
 	padding-top: 5%;
     vertical-align: middle;
+}
+
+.playlist td{
+	text-align: center;
 }
 
 .table_header{

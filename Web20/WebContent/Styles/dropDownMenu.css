@@ -1,4 +1,4 @@
-/* HAMBURGER ICON ANIMATED */
+/* DROP DOWN ANIMATION */
 .spotify-animate {
 	opacity: 0.8;    
 }
@@ -9,24 +9,49 @@
     opacity: 0.8;
 }
 
-/* HAMBURGER ICON */
+/* DROP DOWN HEADER */
+
 .spotify_result_button {
-    display: block;
-}
-.soundcloud_result_button {
-    display: block;
-}
-.deezer_result_button {
-    display: block;
+	padding-left: 10px;
+	width: 100%;
 }
 
-/* HAMBURGER */
+.soundcloud_result_button {
+	padding-left: 10px;
+	width: 100%;
+}
+
+.deezer_result_button {
+	padding-left: 10px;
+	width: 100%;
+}
+
+.spotify_result_button a{
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}
+
+.soundcloud_result_button a{
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}
+
+.deezer_result_button a{
+    font-size: 14pt;
+    color: #63717f;
+    text-decoration: none;
+}
+
+/* ANIMATION */
 .menui {
     transition: 0.6s ease;
     transition-timing-function: cubic-bezier(.75, 0, .29, 1.01);
     margin-top: 6px;
 }
 
+/* SUBMENU FOR SPOTIFY */
 .widgets_spotify {
     display: none;
     width: 100%;
@@ -48,6 +73,7 @@
     text-decoration: none;
 }
 
+/* SUBMENU FOR SOUNDCLOUD */
 .widgets_soundcloud {
     display: none;
     width: 100%;
@@ -69,6 +95,7 @@
     text-decoration: none;
 }
 
+/* SUBMENU FOR DEEZER */
 .widgets_deezer {
     display: none;
     width: 100%;
