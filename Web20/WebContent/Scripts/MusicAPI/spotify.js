@@ -16,7 +16,7 @@ function spotifySearch(type,searchQuery,numOfResults, callback){
 		},
 		success : function(response)
 		{	
-			var result = "";
+			var result = [];
 			for (var n = 0; n < numOfResults; n++){
 				var uri="";
 				switch (type){
@@ -30,7 +30,7 @@ function spotifySearch(type,searchQuery,numOfResults, callback){
 						uri = "https://embed.spotify.com/?uri="+response.artists.items[n].uri;
 						break;
 				}
-				result+=uri+"\t"
+				result[n]=uri;
 //				$("h2").append('<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src='+uri+'></iframe>');				
 			}
 			callback(result);

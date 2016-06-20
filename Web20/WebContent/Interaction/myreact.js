@@ -1,5 +1,3 @@
-var songSaved = false; //ist der Song schon in einer Playlist? - muss eine Funktion sein, die abfragt ob SongID schon in Liste
-
 //React Elemente
 var SongList = React.createClass({
   render: function() {
@@ -69,6 +67,7 @@ var WidgetBox = React.createClass({
 			
 		return ( 
 			<div class="widgetBoxWithAddButton">
+			<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={this.props.uri}></iframe>
 			Widget fuer Song <Button songid={this.props.songid}/>
 			</div>
 		);
