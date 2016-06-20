@@ -4,12 +4,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-
+	<script src="/Web20/Scripts/Database/database.js"></script>
+<title>Login page</title>
 <link href="/Web20/Styles/login.css" rel="stylesheet" />
 
 </head>
 <body>
-
+	<form action="checklogin.jsp" method="post">
+		<h1>Please sign in</h1>
+		Login<input type="text" name="name" /><br>
+		Password<input type="password" name="password" /><br>
+		<input type="submit" name="submit" value="OK" />
+	</form>
+	<a href="register.jsp">Not registered?</a>
 </body>
 </html>
