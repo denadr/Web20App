@@ -23,9 +23,14 @@
 /* DROP DOWN HEADER */
 
 .spotify_result_button {
-	padding-left: 30px;
-	margin: 10px auto;
 	width: 100%;
+	font-size: 15pt;
+    color: #63717f;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
 	
 	background: #2b303b;
 	border: 0;
@@ -35,9 +40,14 @@
 }
 
 .soundcloud_result_button {
-	padding-left: 30px;
-	margin: 10px auto;
 	width: 100%;
+	font-size: 15pt;
+    color: #63717f;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
 	
 	background: #2b303b;
 	border: 0;
@@ -47,9 +57,14 @@
 }
 
 .deezer_result_button {
-	padding-left: 30px;
-	margin: 10px auto;
 	width: 100%;
+	font-size: 15pt;
+    color: #63717f;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
 	
 	background: #2b303b;
 	border: 0;
