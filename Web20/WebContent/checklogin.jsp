@@ -13,10 +13,10 @@
 	
 	}
 	if(user!=null){
-		%><script>window.location="search.html";</script><%
+		response.sendRedirect("search.html");
 	}
 	else{
 		%><script>alert("Password or username not correct")</script> <%
-		%><script>window.location="login.jsp";</script><%
+		response.sendRedirect("login.jsp");
 	}
 %>

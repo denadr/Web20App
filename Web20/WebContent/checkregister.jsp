@@ -10,11 +10,11 @@
 			Database db = new Database();
 			if(db.register(email, name, pw)){
 				%><script>alert("Succeeded");</script><%
-				%><script>window.location="search.html";</script><%
+				response.sendRedirect("search.html");
 			}
 			else{
 				%><script>alert("Username not free");</script><%
-				%><script>window.location="register.jsp";</script><%
+				response.sendRedirect("register.jsp");
 
 			}
 		}catch(Exception e){
@@ -23,6 +23,6 @@
 	}
 	else{
 		%><script>alert("Need more information");</script><%
-		%><script>window.location="register.jsp";</script><%
+		response.sendRedirect("register.jsp");
 	}
 %>
