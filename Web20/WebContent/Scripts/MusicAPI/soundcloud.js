@@ -13,7 +13,7 @@ function soundcloudSearch(type,searchQuery,numOfResults, callback){
 	
 	SC.get('/'+type, {q: searchQuery}).then(function(tracks) {	
 		var result = "";
-		alert(tracks[0].id);
+		
 		var uri="";
 		for (var i=0; i<numOfResults ; i++){
 			uri = "//w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/"+tracks[i].id+"&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true";
