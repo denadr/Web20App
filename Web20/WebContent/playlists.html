@@ -11,7 +11,7 @@
 		<script src="/Web20/Interaction/hamburgerMenu.js"></script>
 		<script src="/Web20/CodeBehind/playlists.js"></script>
 		
-		<link href="/Web20/Styles/playlist.css" rel="stylesheet" />
+		<link href="/Web20/Styles/playlists.css" rel="stylesheet" />
 		<link href="/Web20/Styles/hamburgerMenu.css" rel="stylesheet" />
 		
 		<script src="https://fb.me/react-15.1.0.js"></script>
@@ -34,51 +34,60 @@
   						</a>
   					</td>
 					<td class="menu_login_button" width="90%">
-						<input class="login_button" href="#" type="submit" value="Sign in" />
+						<input class="login_button" href="#" type="submit" value="Account" />
 					</td>
 				</tr>
 				<tr>
 					<td class="mobilenav_container" colspan="2">
 						<div class="mobilenav">
-    						<li><a href="#">Login</a></li>
-    						<li><a href="#">Register</a></li>
+    						<li><a href="#">Playlists</a></li>
+    						<li><a href="#">Search</a></li>
+    						<li><a href="#">Logout</a></li>
   						</div>
 					</td>
 				</tr>
 			</table>
 		</header>
 		
+		<!-- Seitenleiste für Playlists -->
+		<aside>
+			<p><a href="#">Playlist 1</a></p>
+			<p><a href="#">Playlist 2</a></p>
+			<p><a href="#">Playlist 3</a></p>
+		</aside>
+		
+		<!-- Playlist Element -->
 		<table class="playlist">
 			<tr class="table_header">
-				<td>Playlistname</td>
+				<td colspan="4">Playlistname</td>
 			</tr>
 			
-			<tr>
+			<!-- Hier Widgets einfügen -->
+			<tr class="song_decription">
 				<td>Number</td>
 				<td>Titel</td>
 				<td>Play</td>
 				<td>Pause</td>
 			</tr>
 			
-			<tr>
+			<tr class="song_decription">
 				<td>Number</td>
 				<td>Titel</td>
 				<td>Play</td>
 				<td>Pause</td>
 			</tr>
 			
-			<tr>
+			<tr class="song_decription">
 				<td>Number</td>
 				<td>Titel</td>
 				<td>Play</td>
 				<td>Pause</td>
-			</tr>
-			
-			<tr>
-				<td>Addbutton</td>
 			</tr>
 		</table>
-		 		
-		<p class="playlist"></p><!-- React JS Tags Container -->
+		
+		<!-- Play Menu (Pause, Skip, Stop etc.) -->
+		<footer>
+		</footer>
+		
 		</body>
 </html>
