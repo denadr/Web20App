@@ -18,6 +18,6 @@
 		Password<input type="password" name="pw" /><br>
 		<input type="submit" name="submit" value="OK" />
 	</form>
-	<a href="search.jsp">Back</a>
+	<a href="search.html">Back</a>
 </body>
 </html>
