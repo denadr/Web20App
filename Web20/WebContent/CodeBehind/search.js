@@ -1,11 +1,35 @@
-function search_button_click()
+require.config(
+{
+	paths: 
+	{
+        'react': 'Interaction/react',
+    }
+});
+
+var React = null;
+var ReactDOM = null;
+require(['/Web20/Interaction/react.js'], function(react)
+	{
+		alert("REACT:" + react);
+		React = react;
+	});
+require(['/Web20/Interaction/react-dom.js'], function(reactDom)
+	{
+		alert("REACTDOM:" + reactDom);
+		ReactDOM = reactDom;
+	});
+require(['/Web20/Interaction/myreact.js'], function(myreact)
+		{
+			alert("MYREACT:" + myreact);
+		});
+
+var search_button_click = function ()
 {
 	// Collect parameters from UI
 	var query = $("#searchQuery").val();
 	var maxResults = 10;
 	
 	// TODO: Call API functionality with data and update UI
-	//alert("Search for " + query);
 	deezerSearch('track', query, maxResults, function (result)
 	{
 		//alert(result);

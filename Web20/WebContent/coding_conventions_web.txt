@@ -20,3 +20,7 @@ Angaben zum Layout:
 1.	Möglichst auch im jeweiligen CSS File
 
 2.	Dynamisches Layout - Möglichst prozentuale Aufteilung oder in em
+
+
+
+WICHTIG: Nur HTTPS bei Links verwenden, da sonst die Interaktion nicht funktioniert

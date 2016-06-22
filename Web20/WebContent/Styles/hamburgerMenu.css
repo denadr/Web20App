@@ -1,3 +1,31 @@
+
+.menu_bar{
+	width: 160px;
+	height: 50px;
+	
+	position: relative;
+    display: inline-block;
+    padding: 5px;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.login_button {
+	width: 100px;
+	height: 30px;
+	background: #2b303b;
+	border: none;
+	
+	text-align: right;
+	
+	font-size: 15pt;
+	color: #63717f;
+}
+
 /* HAMBURGER ICON ANIMATED */
 .top-animate {
 	opacity: 0.8;    
@@ -36,7 +64,6 @@
     margin-top: 6px;
 }
 
-
 .icon {
     display: block;
     padding: 1px 4px;
@@ -48,13 +75,24 @@
     display: none;
     width: 100%;
     height: 100%;
-    opacity: 0.8;
+    
+    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    
+    opacity: 0.95;
+    background: #2b303b;
+	border: 0;
+	
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
 }
 
 /* SUBMENU LISTELEMENTS */
 .mobilenav li {
     list-style-type: none;
-    padding: 8px;
+    padding: 10px;
     text-align: right;
 }
 
@@ -63,4 +101,8 @@
     font-size: 14pt;
     color: #63717f;
     text-decoration: none;
+}
+
+.mobilenav li a:hover {
+	color: #ffffff;
 }
