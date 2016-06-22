@@ -9,7 +9,14 @@
 		try{
 			Database db = new Database();
 			if(db.register(email, name, pw)){
-				%><script>alert("Succeeded");</script><%
+				User user = db.login(name, pw);
+				String id = String.valueOf(user.getId());
+				%><script>
+					var username = '<%=name%>';
+					var ID = '<%=id%>';
+					localStorage.setItem('username',username)
+					localStorage.setItem('ID',ID);
+				</script> <%
 				response.sendRedirect("search.html");
 			}
 			else{

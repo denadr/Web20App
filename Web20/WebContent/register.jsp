@@ -11,7 +11,7 @@
 
 </head>
 <body>
-	<form action="checkregister.jsp" method="post">
+	<form action="checkregister.jsp" method="post" accept-charset="ISO-8859-1">
 		<h1>Please sign up</h1>
 		Email<input type="text" name="email"/><br>
 		Login<input type="text" name="name" /><br>

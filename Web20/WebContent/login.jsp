@@ -5,14 +5,16 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<script src="/Web20/Scripts/Database/database.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+	
 <title>Login page</title>
 <link href="/Web20/Styles/login.css" rel="stylesheet" />
 
 </head>
 <body>
-	<form action="checklogin.jsp" method="post">
+	<form action="checklogin.jsp" method="post" accept-charset="ISO-8859-1">
 		<h1>Please sign in</h1>
-		Login<input type="text" name="name" /><br>
+		Login<input type="text" name="name"/><br>
 		Password<input type="password" name="password" /><br>
 		<input type="submit" name="submit" value="OK" />
 	</form>
