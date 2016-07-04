@@ -17,6 +17,9 @@ function spotifySearch(type,searchQuery,numOfResults, callback){
 		success : function(response)
 		{	
 			var result = [];
+			if(numOfResults > response.tracks.items.length){
+				numOfResults = response.tracks.items.length;
+			}
 			for (var n = 0; n < numOfResults; n++){
 				var uri="";
 				switch (type){
