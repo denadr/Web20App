@@ -27,14 +27,12 @@ var WidgetFrame = React.createClass(
 
 var search_button_click = function ()
 {
-	// Collect parameters from UI
 	var query = $('#searchQuery').val();
 	var maxResults = 10;
 	
-	// TODO: Call API functionality with data and update UI
 	deezerSearch('track', query, maxResults, function (result)
 	{
-		//ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('deezer_results'));
+		ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('deezer_results'));
 	});
 	soundcloudSearch('tracks', query, maxResults, function (result)
 	{
@@ -43,7 +41,7 @@ var search_button_click = function ()
 	});
 	spotifySearch('track', query, maxResults, function (result)
 	{
-		//ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('spotify_results'));
+		ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('spotify_results'));
 	});
 }
 
