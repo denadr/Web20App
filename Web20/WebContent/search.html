@@ -29,11 +29,13 @@
 		
 		<!-- Logic -->
 		<script type="text/babel" src="/Web20/Interaction/hamburgerMenu.js"></script>
+		<script type="text/babel" src="/Web20/Interaction/dropDownButton.js"></script>
 		<script type="text/babel" src="/Web20/CodeBehind/search.js"></script>
 		
 		<!-- Styles -->
 		<link href="/Web20/Styles/search.css" rel="stylesheet"/>
 		<link href="/Web20/Styles/hamburgerMenu.css" rel="stylesheet" />
+		<link href="/Web20/Styles/dropDownButton.css" rel="stylesheet" />
 	</head>
   
 	<body>
@@ -90,6 +92,15 @@
 		
 		<div id="results"></div>
 		<div id="dz-root"></div>
+		
+		<div class="dropDown">
+			<button id="myDropDownButton" class="dropDownButton">Dropdown</button>
+  			<div id="myDropDownContent" class="dropDownContent">
+    			<a href="login.jsp">Home</a>
+    			<a href="login.jsp">About</a>
+    			<a href="login.jsp">Contact</a>
+  			</div>
+		</div>
 		
 		<!-- Play Menu (Pause, Skip, Stop etc.) -->
 		<footer>

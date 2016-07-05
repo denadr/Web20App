@@ -13,15 +13,15 @@ function request(methodUrl, callback)
 
 // ===== User requests =====
 
-function register(email, username, password)
-{
-	request('user/register/' + email + '/' + username + '/' + password, testCallback);
-}
+//function register(email, username, password)
+//{
+//	request('user/register/' + email + '/' + username + '/' + password, testCallback);
+//}
 
-function login(username, password)
-{
-	request('user/login/' + username + '/' + password, testCallback);
-}
+//function login(username, password)
+//{
+//	request('user/login/' + username + '/' + password, testCallback);
+//}
 
 function deleteUser(userId)
 {
@@ -41,7 +41,7 @@ function deletePlaylist(playlistId)
 }
 
 function getPlaylists(userId)
-{
+{//localStorage.getItem('ID')
 	request('playlist/getall/' + userId, testCallback);
 }
 

@@ -36,8 +36,7 @@ var search_button_click = function ()
 	});
 	soundcloudSearch('tracks', query, maxResults, function (result)
 	{
-		alert(result);
-		//ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('soundcloud_results'));
+		ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('soundcloud_results'));
 	});
 	spotifySearch('track', query, maxResults, function (result)
 	{
