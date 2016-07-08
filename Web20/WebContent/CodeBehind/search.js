@@ -5,6 +5,13 @@ var playlists = null;
 
 window.onload = function ()
 {
+//	$.getScript('/Web20/Scripts/Database/database.js', function()
+//			{
+//				getPlaylists(18, function(lists)
+//				{
+//					playlists = lists;
+//				});
+//			});
 	userId = localStorage.getItem('ID');
 	if (userId != null)
 	{
