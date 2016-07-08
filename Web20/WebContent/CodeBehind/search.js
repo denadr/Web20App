@@ -11,22 +11,16 @@ window.onload = function ()
 		loggedIn = true;
 		userName = localStorage.getItem('username');
 		alert('User : ' + userName);
-//		getPlaylists(userId, function (dbData)
-//		{
-//			playlists = dbData;
-//			alert(JSON.stringify(playlists));
-//		});
+		$.getScript('/Web20/Scripts/Database/database.js', function()
+		{
+			getPlaylists(userId, function(lists)
+			{
+				playlists = lists;
+			});
+		});
 	}
 	else alert('userId : ' + userId);
 }
-
-var HelloWorld = React.createClass(
-{
-    render : function () 
-    {
-    	return(<h1>Hello, {this.props.name}!</h1>);
-    }
-});
 
 var WidgetFrame = React.createClass(
 {

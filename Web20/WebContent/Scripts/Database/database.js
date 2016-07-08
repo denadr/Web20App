@@ -42,7 +42,10 @@ function deletePlaylist(playlistId)
 
 function getPlaylists(userId, callback)
 {
-	request('playlist/getall/' + userId, callback);
+	request('playlist/getall/' + userId, function(dbResponse)
+	{
+		callback(dbResponse.playlists);
+	});
 }
 
 function getPlaylist(playlistId)
