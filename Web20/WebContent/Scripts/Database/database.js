@@ -57,6 +57,7 @@ function getPlaylist(playlistId)
 
 function addTitle(playlistId, description, url)
 {
+	description = 'DummyDescription';
 	request('title/add/' + playlistId + '/' + description + '/' + url, testCallback);
 }
 
