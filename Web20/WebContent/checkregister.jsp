@@ -22,7 +22,6 @@
 			else{
 				%><script>alert("Username not free");</script><%
 				response.sendRedirect("register.jsp");
-
 			}
 		}catch(Exception e){
 			

@@ -40,9 +40,9 @@ function deletePlaylist(playlistId)
 	request('playlist/delete/' + playlistId, testCallback);
 }
 
-function getPlaylists(userId)
-{//localStorage.getItem('ID')
-	request('playlist/getall/' + userId, testCallback);
+function getPlaylists(userId, callback)
+{
+	request('playlist/getall/' + userId, callback);
 }
 
 function getPlaylist(playlistId)

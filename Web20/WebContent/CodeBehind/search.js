@@ -1,3 +1,25 @@
+var loggedIn = false;
+var userId = null;
+var userName = null;
+var playlists = null;
+
+window.onload = function ()
+{
+	userId = localStorage.getItem('ID');
+	if (userId != null)
+	{
+		loggedIn = true;
+		userName = localStorage.getItem('username');
+		alert('User : ' + userName);
+//		getPlaylists(userId, function (dbData)
+//		{
+//			playlists = dbData;
+//			alert(JSON.stringify(playlists));
+//		});
+	}
+	else alert('userId : ' + userId);
+}
+
 var HelloWorld = React.createClass(
 {
     render : function () 
@@ -70,7 +92,7 @@ var WidgetFrame = React.createClass(
 			);
 	}
 });
-//
+
 //var WidgetContainer = React.createClass(
 //{
 //	render : function ()

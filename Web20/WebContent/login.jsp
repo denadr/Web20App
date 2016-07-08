@@ -15,7 +15,7 @@
 	<form action="checklogin.jsp" method="post" accept-charset="ISO-8859-1">
 		<h1>Please sign in</h1>
 		Login<input type="text" name="name"/><br>
-		Password<input type="password" name="password" /><br>
+		Password<input type="password" name="pw" /><br>
 		<input type="submit" name="submit" value="OK" />
 	</form>
 	<a href="register.jsp">Not registered?</a>
