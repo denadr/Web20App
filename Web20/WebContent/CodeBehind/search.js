@@ -32,57 +32,43 @@ $(document).ready(function ()
 	else console.log('userId : ' + userId);
 });
 
-var HelloWorld = React.createClass(
+var AddItem = React.createClass(
 {
-    render : function () 
-    {
-    	return(<h1>Hello, world!</h1>);
-    }
+	addSong : function ()
+	{
+		console.log('addSong: ' + this.props.uri + ', ' + this.props.playlist.id + ', ' + this.props.playlist.name);
+		// TODO: Prepare the uri to be url encoded
+		addTitle(this.props.playlist.id, '', this.props.uri);
+	},
+	
+	render : function ()
+	{
+		var css =
+		{
+			color : 'black',
+	    	padding : '12px 16px',
+	    	textDecoration : 'none',
+	    	display : 'block'
+		};
+		
+		return (<a style={css} onClick={this.addSong}>{this.props.playlist.name}</a>);
+	}
 });
 
-//var AddItem = React.createClass(
-//{
-//	add : function ()
-//	{
-//		
-//	},
-//	
-//	render : function ()
-//	{
-//		var optionCss =
-//		{
-//			color : 'black',
-//	    	padding : '12px 16px',
-//	    	textDecoration : 'none',
-//	    	display : 'block'
-//		};
-//		
-//		return (
-//				<a style={optionCss} href="#home">{this.props.playlistName}</a>
-//			);
-//	}
-//});
-
-var WidgetFrame = React.createClass(
+var AddMenu = React.createClass(
 {
 	getInitialState : function ()
 	{
-		return { clicked : false };
+		return { opened : false };
 	},
 	
 	dropDown : function ()
 	{
-		this.setState({ clicked : !this.state.clicked });
-	},
-	
-	addSong : function (playlistId, uri)
-	{
-		console.log('addSong : ' + uri + ', ' + playlistId);
-		//addTitle(playlistId, '', this.props.uri);
+		this.setState({ opened : !this.state.opened });
 	},
 	
 	render : function ()
-	{		
+	{
 		var mainCss = 
 		{
 			float : 'right',
@@ -102,7 +88,7 @@ var WidgetFrame = React.createClass(
 		
 		var contentCss =
 		{
-			display : this.state.clicked ? 'block' : 'none',
+			display : this.state.opened ? 'block' : 'none',
 	    	position : 'absolute',
 	    	backgroundColor : '#F9F9F9',
 	    	minWidth : 160,
@@ -111,37 +97,30 @@ var WidgetFrame = React.createClass(
 	    	right : 0
 		};
 		
-		var optionCss =
-		{
-			color : 'black',
-	    	padding : '12px 16px',
-	    	textDecoration : 'none',
-	    	display : 'block'
-		};
-		
-		return(
-				<div>
-					{this.props.uris.map(function(uri)
+		return (
+			<div style={mainCss}>
+				<button style={buttonCss} onClick={this.dropDown}>Add</button>
+				<div style={contentCss}>
+					{this.props.options.map(function(option)
 					{
-						return (
-							<div>
-								<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={uri}></iframe>
-								<div style={mainCss}>
-									<button style={buttonCss} onClick={this.dropDown}>Add</button>
-									<div style={contentCss}>
-										{this.props.lists.map(function(playlist)
-										{
-											return (
-													<a style={optionCss} onClick={this.addSong.bind(this, playlist.id, uri)}>{playlist.name}</a>
-												);
-										}, this)}
-					    			</div>
-					    		</div>
-					    	</div>
-							);
+						return <AddItem uri={this.props.uri} playlist={option} />;
 					}, this)}
-				</div>
-			);
+	   			</div>
+	   		</div>	
+		);
+	}
+});
+
+var WidgetFrame = React.createClass(
+{
+	render : function ()
+	{		
+		return (
+			<div>
+				<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={this.props.uri}></iframe>
+				<AddMenu uri={this.props.uri} options={playlists} />
+			</div>
+		);
 	}
 });
 
@@ -149,9 +128,13 @@ var WidgetContainer = React.createClass(
 {
 	render : function ()
 	{
-		return
-		(
-			<p>{this.props.uris[0]}</p>
+		return (
+			<div>
+				{this.props.uris.map(function(uri)
+				{
+					return <WidgetFrame uri={uri} />;
+				}, this)}
+			</div>
 		);
 	}
 });
@@ -159,20 +142,19 @@ var WidgetContainer = React.createClass(
 var search_button_click = function ()
 {
 	var query = $('#searchQuery').val();
-	var maxResults = 10;
+	var maxResults = 3;
 	
 	deezerSearch('track', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetFrame uris={result} lists={playlists} /> , document.getElementById('deezer_results'));
+		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('deezer_results'));
 	});
 	soundcloudSearch('tracks', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetFrame uris={result} lists={playlists} /> , document.getElementById('soundcloud_results'));
+		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('soundcloud_results'));
 	});
 	spotifySearch('track', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetFrame uris={result} lists={playlists} /> , document.getElementById('spotify_results'));
+		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('spotify_results'));
 	});
 }
-
 document.getElementById('search_button').addEventListener('click', search_button_click);
