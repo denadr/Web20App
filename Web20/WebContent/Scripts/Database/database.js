@@ -1,27 +1,27 @@
 function testDb() { request('dbtest', testCallback); }
 
-function testCallback(data) { alert(JSON.stringify(data)); }
+function testCallback(data) { console.log(JSON.stringify(data)); }
 
 function request(methodUrl, callback)
-{alert('request');
+{
 	$.ajax
 	({
 		url : '/Web20/rest/DatabaseService/' + methodUrl,
-		success : function(response) { alert('success');callback(response); }
+		success : function(response) { callback(response); }
 	});
 }
 
 // ===== User requests =====
 
-function register(email, username, password)
-{
-	request('user/register/' + email + '/' + username + '/' + password, testCallback);
-}
+//function register(email, username, password)
+//{
+//	request('user/register/' + email + '/' + username + '/' + password, testCallback);
+//}
 
-function login(username, password)
-{alert('login');
-	request('user/login/' + username + '/' + password, testCallback);
-}
+//function login(username, password)
+//{
+//	request('user/login/' + username + '/' + password, testCallback);
+//}
 
 function deleteUser(userId)
 {

@@ -69,8 +69,7 @@ public class Database
         if (results.next())
         { // User with requested username found -> Check password.
         	String savedPassword = results.getString("Password");
-        	String salt = PasswordUtils.getSalt(savedPassword);
-        	if (savedPassword.equals(salt + PasswordUtils.encrypt(password)));
+        	if (savedPassword.equals(PasswordUtils.encrypt(password, PasswordUtils.getSalt(savedPassword))))
         	{ // Password correct -> Login successful.
         		user = new User(results.getInt("Id"), results.getString("Username"), results.getString("Email"));
         	}

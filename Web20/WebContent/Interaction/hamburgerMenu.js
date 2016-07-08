@@ -1,11 +1,9 @@
-// HAMBURGLERv2
-
 function togglescroll () {
-  $('body').on('touchstart', function(e){
-    if ($('body').hasClass('noscroll')) {
-      e.preventDefault();
-    }
-  });
+	$('body').on('touchstart', function(e){
+		if ($('body').hasClass('noscroll')) {
+			e.preventDefault();
+		}
+	});
 }
 
 $(document).ready(function () {
@@ -19,10 +17,8 @@ $(document).ready(function () {
     });
 });
 
-// PUSH ESC KEY TO EXIT
-
 $(document).keydown(function(e) {
-    if (e.keyCode == 27) {
+    if (e.keyCode == 27) { // Esc for exit
         $(".mobilenav").fadeOut(500);
         $(".top-menu").removeClass("top-animate");
         $("body").removeClass("noscroll");

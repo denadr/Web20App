@@ -3,31 +3,33 @@ var userId = null;
 var userName = null;
 var playlists = null;
 
-window.onload = function ()
+$(document).ready(function ()
 {
-//	$.getScript('/Web20/Scripts/Database/database.js', function()
-//			{
-//				getPlaylists(18, function(lists)
-//				{
-//					playlists = lists;
-//				});
-//			});
+	$.getScript('/Web20/Scripts/Database/database.js', function()
+			{
+				getPlaylists(18, function(lists)
+				{
+					playlists = lists;
+				});
+			});
 	userId = localStorage.getItem('ID');
 	if (userId != null)
 	{
 		loggedIn = true;
+		alert('UserID : ' + userId);
 		userName = localStorage.getItem('username');
-		alert('User : ' + userName);
+		alert('Username : ' + userName);
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
 			getPlaylists(userId, function(lists)
 			{
 				playlists = lists;
+				alert(JSON.stringify(playlists));
 			});
 		});
 	}
 	else alert('userId : ' + userId);
-}
+});
 
 var WidgetFrame = React.createClass(
 {
@@ -64,7 +66,7 @@ var WidgetFrame = React.createClass(
 		{
 			display : this.state.clicked ? 'block' : 'none',
 	    	position : 'absolute',
-	    	backgroundColor : '#f9f9f9',
+	    	backgroundColor : '#F9F9F9',
 	    	minWidth : 160,
 	    	overflow : 'auto',
 	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
@@ -83,7 +85,7 @@ var WidgetFrame = React.createClass(
 				<div>
 					<iframe frameborder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={this.props.uri}></iframe>
 					<div style={mainCss}>
-						<button style={buttonCss} onClick={this.dropDown}>Dropdown</button>
+						<button style={buttonCss} onClick={this.dropDown}>Add</button>
 						<div style={contentCss}>
 		    				<a style={optionCss} href="#home">Home</a>
 		    				<a style={optionCss} href="#help">Help</a>
@@ -109,7 +111,7 @@ var search_button_click = function ()
 {
 	var query = $('#searchQuery').val();
 	var maxResults = 10;
-	
+	alert(localStorage.getItem('username'));
 	deezerSearch('track', query, maxResults, function (result)
 	{
 		ReactDOM.render(<WidgetFrame uri={result[0]} /> , document.getElementById('deezer_results'));

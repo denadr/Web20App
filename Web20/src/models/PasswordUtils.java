@@ -7,11 +7,14 @@ import javax.xml.bind.DatatypeConverter;
 
 public abstract class PasswordUtils
 {
-	public static String encrypt(String password)
+	public static String encrypt(String password, String salt)
 	{
-		String salt = getRandomSalt();
-		
 		return salt + hash(password, salt);
+	}
+	
+	public static String encrypt(String password)
+	{		
+		return encrypt(password, getRandomSalt());
 	}
 
 	public static String getSalt(String str)
