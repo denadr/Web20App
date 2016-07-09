@@ -5,15 +5,8 @@ var playlists = null;
 
 $(document).ready(function ()
 {
-	$.getScript('/Web20/Scripts/Database/database.js', function()
-			{
-				getPlaylists(18, function(lists)
-				{
-					playlists = lists;
-					console.log(JSON.stringify(lists));
-				});
-			});
 	userId = localStorage.getItem('ID');
+	userId = 18; // Remove this line if the local storage works
 	if (userId != null)
 	{
 		loggedIn = true;
@@ -46,8 +39,14 @@ var AddMenu = React.createClass(
 
 	addSong : function (playlist)
 	{
-		addTitle(playlist.id, '', this.props.uri);
-		
+		if (loggedIn)
+		{
+			addTitle(playlist.id, '', this.props.uri);
+		}
+		else
+		{
+			alert('Please login.');
+		}
 		this.setState( { opened : false } );
 	},
 	

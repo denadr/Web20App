@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<script src="/Web20/Scripts/Database/database.js"></script>
 <title>Register page</title>
 
 <link href="/Web20/Styles/register.css" rel="stylesheet" />

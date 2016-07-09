@@ -4,8 +4,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<script src="/Web20/Scripts/Database/database.js"></script>
-	<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
 	
 <title>Login page</title>
 <link href="/Web20/Styles/login.css" rel="stylesheet" />
