@@ -6,13 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import models.Database;
 import models.User;
@@ -309,32 +313,35 @@ public class DatabaseService
 	
 	// ===== Services for Title =====
 	
-	@GET
-	@Path("/title/add/{playlistId}/{description}/{url}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String addTitle(@PathParam("playlistId") String playlistId, @PathParam("description") String description, @PathParam("url") String url)
+	@POST
+	@Path("/title/add")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addTitle(String jsonString)
 	{
 		Database database = null;
 		String result = "{\"message\":\"";
 		try
 		{
+			JsonObject jsonData = (new JsonParser()).parse(jsonString).getAsJsonObject();
 			database = new Database();
-			result += database.addTitle(Integer.parseInt(playlistId), description, url) ? "success" : "failure"; 
+			result += database.addTitle(
+					jsonData.get("playlistId").getAsInt(), 
+					jsonData.get("description").getAsString(), 
+					jsonData.get("url").getAsString()) ? "success" : "failure"; 
         } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
-			// TODO: Detailed error handling
 			result += "ClassNotFoundException";
-        } 
-		catch (NumberFormatException e) // Parsing of playlistId failed.
-		{
-			// TODO: Detailed error handling
-			result += "NumberFormatException";
         }
 		catch (SQLException e) // Some exception while accessing the SQL database.
 		{
 			// TODO: Detailed error handling
 			result += "SQLException";
+        }
+		catch (Exception e)
+		{
+			result += "Exception";
         }
 		finally
 		{
@@ -344,7 +351,7 @@ public class DatabaseService
 			}
 		}
 		return result + "\"}";
-	}
+}
 
 	@GET
 	@Path("/title/delete/{playlistId}/{titleId}")

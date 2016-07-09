@@ -55,10 +55,19 @@ function getPlaylist(playlistId)
 
 //===== Title requests =====
 
-function addTitle(playlistId, description, url)
+function addTitle(listId, descr, uri, callback)
 {
-	description = 'DummyDescription';
-	request('title/add/' + playlistId + '/' + description + '/' + url, testCallback);
+	descr = 'DummyDescription';
+	$.ajax
+	({
+		type : 'post',
+		url : '/Web20/rest/DatabaseService/title/add',
+        contentType : 'application/json; charset=utf-8',
+        dataType : 'json',
+        data : JSON.stringify( { playlistId : listId, description : descr, url : uri } ),
+        traditional : true,
+		success : function(response) { testCallback(response); }
+	});
 }
 
 function deleteTitle(playlistId, titleId)

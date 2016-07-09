@@ -32,29 +32,6 @@ $(document).ready(function ()
 	else console.log('userId : ' + userId);
 });
 
-var AddItem = React.createClass(
-{
-	addSong : function ()
-	{
-		console.log('addSong: ' + this.props.uri + ', ' + this.props.playlist.id + ', ' + this.props.playlist.name);
-		// TODO: Prepare the uri to be url encoded
-		addTitle(this.props.playlist.id, '', this.props.uri);
-	},
-	
-	render : function ()
-	{
-		var css =
-		{
-			color : 'black',
-	    	padding : '12px 16px',
-	    	textDecoration : 'none',
-	    	display : 'block'
-		};
-		
-		return (<a style={css} onClick={this.addSong}>{this.props.playlist.name}</a>);
-	}
-});
-
 var AddMenu = React.createClass(
 {
 	getInitialState : function ()
@@ -64,7 +41,14 @@ var AddMenu = React.createClass(
 	
 	dropDown : function ()
 	{
-		this.setState({ opened : !this.state.opened });
+		this.setState( { opened : !this.state.opened } );
+	},
+
+	addSong : function (playlist)
+	{
+		addTitle(playlist.id, '', this.props.uri);
+		
+		this.setState( { opened : false } );
 	},
 	
 	render : function ()
@@ -96,6 +80,14 @@ var AddMenu = React.createClass(
 	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
 	    	right : 0
 		};
+
+		var optionCss =
+		{
+			color : 'black',
+	    	padding : '12px 16px',
+	    	textDecoration : 'none',
+	    	display : 'block'
+		};
 		
 		return (
 			<div style={mainCss}>
@@ -103,7 +95,7 @@ var AddMenu = React.createClass(
 				<div style={contentCss}>
 					{this.props.options.map(function(option)
 					{
-						return <AddItem uri={this.props.uri} playlist={option} />;
+						return <a style={optionCss} onClick={this.addSong.bind(this, option)}>{option.name}</a>;
 					}, this)}
 	   			</div>
 	   		</div>	

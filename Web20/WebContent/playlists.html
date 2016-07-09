@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Ultimate Music Search Engine Website
-			 Author: Lars Nonnemann
-		-->
 		<meta charset="UTF-8" />
 		<title> Ultimate Music Search Engine </title>
 		
+		<!-- jQuery -->
 		<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
-		<script src="/Web20/Interaction/hamburgerMenu.js"></script>
-		<script src="/Web20/CodeBehind/playlists.js"></script>
+				
+		<!-- React -->
+		<script src="https://fb.me/react-15.2.0.js"></script>
+		<script src="https://fb.me/react-dom-15.2.0.js"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.js"></script>
 		
+		<!-- Logic -->
+		<script type="text/babel" src="/Web20/Interaction/hamburgerMenu.js"></script>
+		<script type="text/babel" src="/Web20/Scripts/Database/database.js"></script>
+		<script type="text/babel" src="/Web20/CodeBehind/playlists.js"></script>
+		
+		<!-- Styles -->
 		<link href="/Web20/Styles/playlists.css" rel="stylesheet" />
 		<link href="/Web20/Styles/hamburgerMenu.css" rel="stylesheet" />
-		
-		<script src="https://fb.me/react-15.1.0.js"></script>
-		<script src="https://fb.me/react-dom-15.1.0.js"></script>
-    	<script src="/Web20/Interaction/myreact.js" type="text/babel"></script>
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 	</head>
   
 	<body>
@@ -41,7 +43,6 @@
 					<td class="mobilenav_container" colspan="2">
 						<div class="mobilenav">
     						<li><a href="#">Playlists</a></li>
-    						<li><a href="#">Search</a></li>
     						<li><a href="#">Logout</a></li>
   						</div>
 					</td>
@@ -49,45 +50,9 @@
 			</table>
 		</header>
 		
-		<!-- Seitenleiste für Playlists -->
-		<aside>
-			<p><a href="#">Playlist 1</a></p>
-			<p><a href="#">Playlist 2</a></p>
-			<p><a href="#">Playlist 3</a></p>
-		</aside>
 		
-		<!-- Playlist Element -->
-		<table class="playlist">
-			<tr class="table_header">
-				<td colspan="4">Playlistname</td>
-			</tr>
-			
-			<!-- Hier Widgets einfügen -->
-			<tr class="song_decription">
-				<td>Number</td>
-				<td>Titel</td>
-				<td>Play</td>
-				<td>Pause</td>
-			</tr>
-			
-			<tr class="song_decription">
-				<td>Number</td>
-				<td>Titel</td>
-				<td>Play</td>
-				<td>Pause</td>
-			</tr>
-			
-			<tr class="song_decription">
-				<td>Number</td>
-				<td>Titel</td>
-				<td>Play</td>
-				<td>Pause</td>
-			</tr>
-		</table>
 		
-		<!-- Play Menu (Pause, Skip, Stop etc.) -->
-		<footer>
-		</footer>
+		<div id="dz-root"></div>
 		
-		</body>
+	</body>
 </html>
