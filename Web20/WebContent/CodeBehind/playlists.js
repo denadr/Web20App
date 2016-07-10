@@ -6,7 +6,6 @@ var playlists = null;
 $(document).ready(function ()
 {
 	userId = localStorage.getItem('ID');
-	userId = 18; // Remove this line if the local storage works
 	if (userId != null)
 	{
 		loggedIn = true;
