@@ -16,16 +16,15 @@
 		String id = String.valueOf(user.getId());
 		System.out.println(name + id);
 		%><script>
-			alert('debug');
-			console.log('debug');
 			var username = '<%=name%>';
 			var ID = '<%=id%>';
-			alert(username + ID);
-			console.log(username + ID);
-			localStorage.setItem('username',username)
+			localStorage.setItem('username',username);
 			localStorage.setItem('ID',ID);
-		</script> <%
-		response.sendRedirect("search.html");
+			window.location = 'search.html';
+		</script><%
+// 		RequestDispatcher rd = request.getRequestDispatcher("search.html");
+// 		rd.forward(request, response);
+// 		response.sendRedirect("search.html");
 	}
 	else{
 		%><script>alert("Password or username not correct");</script> <%
