@@ -87,7 +87,7 @@ var AddMenu = React.createClass(
 	    	display : 'block'
 		};
 		
-		return (
+		return(
 			<div style={mainCss}>
 				<button style={buttonCss} onClick={this.dropDown}>Add</button>
 				<div style={contentCss}>
@@ -105,10 +105,10 @@ var WidgetFrame = React.createClass(
 {
 	render : function ()
 	{		
-		return (
+		return(
 			<div>
 				<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={this.props.uri}></iframe>
-				<AddMenu uri={this.props.uri} options={playlists} />
+				<AddMenu uri={this.props.uri} options={playlists} ></AddMenu>
 			</div>
 		);
 	}
@@ -118,11 +118,11 @@ var WidgetContainer = React.createClass(
 {
 	render : function ()
 	{
-		return (
+		return(
 			<div>
 				{this.props.uris.map(function(uri)
 				{
-					return <WidgetFrame uri={uri} />;
+					return <WidgetFrame uri={uri} ></WidgetFrame>;
 				}, this)}
 			</div>
 		);
@@ -136,15 +136,15 @@ var search_button_click = function ()
 	
 	deezerSearch('track', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('deezer_results'));
+		ReactDOM.render(<WidgetContainer uris={result} ></WidgetContainer>, document.getElementById('deezer_results'));
 	});
 	soundcloudSearch('tracks', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('soundcloud_results'));
+		ReactDOM.render(<WidgetContainer uris={result} ></WidgetContainer>, document.getElementById('soundcloud_results'));
 	});
 	spotifySearch('track', query, maxResults, function (result)
 	{
-		ReactDOM.render(<WidgetContainer uris={result} /> , document.getElementById('spotify_results'));
+		ReactDOM.render(<WidgetContainer uris={result} ></WidgetContainer>, document.getElementById('spotify_results'));
 	});
 }
 document.getElementById('search_button').addEventListener('click', search_button_click);
