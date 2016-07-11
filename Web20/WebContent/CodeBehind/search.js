@@ -1,5 +1,6 @@
+var searched = false;
 var loggedIn = false;
-var playlists = null;
+var playlists = [];
 
 $(document).ready(function ()
 {
@@ -47,22 +48,23 @@ var AddMenu = React.createClass(
 	
 	dropDown : function ()
 	{
-		this.setState( { opened : !this.state.opened } );
+		if (loggedIn)
+		{
+			this.setState( { opened : !this.state.opened } );
+		}
+		else
+		{
+			alert('Please sign in.');
+		}
 	},
 
 	addSong : function (playlist)
 	{
-		if (loggedIn)
+		addTitle(playlist.id, '', this.props.uri, function(response)
 		{
-			addTitle(playlist.id, '', this.props.uri, function(response)
-			{
-				console.log('addSong: ' + response.message);
-			});
-		}
-		else
-		{
-			alert('Please login.');
-		}
+			console.log('addSong: ' + response.message);
+		});
+		
 		this.setState( { opened : false } );
 	},
 	
@@ -163,5 +165,12 @@ var search_button_click = function ()
 	{
 		ReactDOM.render(<WidgetContainer uris={result} ></WidgetContainer>, document.getElementById('spotify_results'));
 	});
+	
+	if (!searched)
+	{
+		searched = true;
+		
+		
+	}
 }
 document.getElementById('search_button').addEventListener('click', search_button_click);
