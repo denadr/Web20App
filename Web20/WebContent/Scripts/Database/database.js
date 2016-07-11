@@ -23,16 +23,26 @@ function request(methodUrl, callback)
 //	request('user/login/' + username + '/' + password, testCallback);
 //}
 
-function deleteUser(userId)
+function deleteUser(userId, callback)
 {
 	request('user/delete/' + userId, testCallback);
 }
 
 //===== Playlist requests =====
 
-function addPlaylist(userId, playlistName)
+function addPlaylist(user_Id, playlistName, callback, caller)
 {
-	request('playlist/add/' + userId + '/' + playlistName, testCallback);
+	request('playlist/add/' + user_Id + '/' + playlistName, function(dbResponse)
+	{
+		var playlist =
+		{
+			id : dbResponse.playlistId,
+			userId : user_Id,
+			name : playlistName,
+			titles : []
+		};
+		callback(playlist, caller);
+	});
 }
 
 function deletePlaylist(playlistId, callback)
@@ -69,7 +79,7 @@ function addTitle(listId, descr, uri, callback)
         dataType : 'json',
         data : JSON.stringify( { playlistId : listId, description : descr, url : uri } ),
         traditional : true,
-		success : function(response) { testCallback(response); }
+		success : function(response) { callback(response); }
 	});
 }
 

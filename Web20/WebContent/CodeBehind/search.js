@@ -40,7 +40,10 @@ var AddMenu = React.createClass(
 	{
 		if (loggedIn)
 		{
-			addTitle(playlist.id, '', this.props.uri);
+			addTitle(playlist.id, '', this.props.uri, function(response)
+			{
+				console.log('addSong: ' + response.message);
+			});
 		}
 		else
 		{

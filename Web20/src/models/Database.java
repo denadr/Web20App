@@ -116,16 +116,29 @@ public class Database
 	
 	// ===== Preparation functions for Playlist(s) =====
 
-	public boolean addPlaylist(int userId, String playlistName) throws SQLException
+	public int addPlaylist(int userId, String playlistName) throws SQLException
 	{
 		// Insert new playlist for user with the requested playlistName only,
 		// if no playlist with that userId and playlistName exists already.
-		return 1 == sqlStatement.executeUpdate(String.format(
-    			"IF NOT EXISTS (SELECT Id FROM %s WHERE User_Id = %d AND Name = '%s') " +
-    			"BEGIN " +
-    				"INSERT INTO %s (User_Id, Name) VALUES(%d, '%s') " +
-    			"END",
-    			playlistTable, userId, playlistName, playlistTable, userId, playlistName));
+		boolean added = 1 == sqlStatement.executeUpdate(String.format(
+    							"IF NOT EXISTS (SELECT Id FROM %s WHERE User_Id = %d AND Name = '%s') " +
+    							"BEGIN " +
+    							"INSERT INTO %s (User_Id, Name) VALUES(%d, '%s') " +
+    							"END",
+    							playlistTable, userId, playlistName, playlistTable, userId, playlistName));
+		
+		int playlistId = -1;
+		if (added)
+		{
+			ResultSet results = sqlStatement.executeQuery(String.format(
+	        		"SELECT Id FROM %s WHERE User_Id = %d AND Name = '%s'", playlistTable, userId, playlistName));
+			if (results.next())
+			{
+				playlistId = results.getInt("Id");
+			}
+			results.close();
+		}		
+		return playlistId;
 	}
 	
 	public boolean deletePlaylist(int playlistId) throws SQLException

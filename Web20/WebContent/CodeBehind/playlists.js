@@ -79,7 +79,27 @@ var MasterDetailView = React.createClass(
 	
 	createPlaylist : function ()
 	{
+		var playlistName = $('#newPlaylistName').val();
+		$('#newPlaylistName').val('');
+		console.log('createPlaylist(' + playlistName + ')...');
 		
+		if (playlistName != null && playlistName != '')
+		{
+			addPlaylist(userId, playlistName, function(playlist, self)
+			{
+				ids[ids.length] = playlist.id;
+						
+				self.props.playlists.push(playlist);
+				self.setState( 
+				{ 
+					currentPlaylistId : playlist.id,
+					changed : self.state.changed
+				});
+						
+				console.log('createPlaylist: success -> ' + JSON.stringify(playlist));
+			}, this);
+		}
+		else alert('Please enter a name.');
 	},
 
 	removePlaylist : function (playlistId)
@@ -91,7 +111,7 @@ var MasterDetailView = React.createClass(
 		this.setState( 
 		{ 
 			currentPlaylistId : this.props.playlists[playlistIndex < this.props.playlists.length ? playlistIndex : playlistIndex - 1].id,
-			changed : !this.state.changed
+			changed : this.state.changed
 		});
 		
 		deletePlaylist(playlistId, function(response)
@@ -131,13 +151,15 @@ var MasterDetailView = React.createClass(
 			<table>
 				<tr>
 					<td>
+						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
+						<button onClick={this.createPlaylist}>New</button>
 						<ul style={listCss}>
 						{this.props.playlists.map(function(list)
 						{
 							return(
 								<li key={list.id}>
 									<a onClick={this.open.bind(this, list.id)}>{list.name}</a>
-									</li>
+								</li>
 							);
 						}, this)}
 						</ul>

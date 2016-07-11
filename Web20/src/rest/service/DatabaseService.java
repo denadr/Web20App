@@ -173,26 +173,26 @@ public class DatabaseService
 	public String addPlaylist(@PathParam("userId") String userId, @PathParam("playlistName") String playlistName)
 	{
 		Database database = null;
-		String result = "{\"message\":\"";
+		String result = "{\"playlistId\":";
 		try
 		{
 			database = new Database();
-			result += database.addPlaylist(Integer.parseInt(userId), playlistName) ? "success" : "failure"; 
+			result += database.addPlaylist(Integer.parseInt(userId), playlistName); 
         } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "ClassNotFoundException";
+			result += -1;
         }  
 		catch (NumberFormatException e) // Parsing of userId failed.
 		{
 			// TODO: Detailed error handling
-			result += "NumberFormatException";
+			result += -1;
         } 
 		catch (SQLException e) // Some exception while accessing the SQL database.
 		{
 			// TODO: Detailed error handling
-			result += "SQLException";
+			result += -1;
         }
 		finally
 		{
@@ -201,7 +201,7 @@ public class DatabaseService
 				database.close();
 			}
 		}
-		return result + "\"}";
+		return result + "}";
 	}
 
 	@GET
