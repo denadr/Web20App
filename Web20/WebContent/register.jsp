@@ -9,14 +9,28 @@
 <link href="/Web20/Styles/register.css" rel="stylesheet" />
 
 </head>
+
 <body>
+	<div class="register">
+	
 	<form action="checkregister.jsp" method="post" accept-charset="ISO-8859-1">
-		<h1>Please sign up</h1>
-		Email<input type="text" name="email"/><br>
-		Login<input type="text" name="name" /><br>
-		Password<input type="password" name="pw" /><br>
-		<input type="submit" name="submit" value="OK" />
+		<h1 class="form_header">Create a new account</h1>
+		
+		<div class="input">
+
+		<h2>Email</h2>
+		<input type="text" name="email"/><br>
+		
+		<h2>Login</h2>
+		<input type="text" name="name" /><br>
+		
+		<h2>Password</h2>
+		<input type="password" name="pw" /><br>
+		</div>
+		
+		<input class="submit" type="submit" name="submit" value="Register" />
 	</form>
-	<a href="search.html">Back</a>
+	<a href="search.html" class="link">Back</a>
+	</div>
 </body>
 </html>

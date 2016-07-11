@@ -10,12 +10,22 @@
 
 </head>
 <body>
+	<div class="login">
+	
 	<form action="checklogin.jsp" method="post" accept-charset="ISO-8859-1">
-		<h1>Please sign in</h1>
-		Login<input type="text" name="name"/><br>
-		Password<input type="password" name="pw" /><br>
-		<input type="submit" name="submit" value="OK" />
+		<h1 class="form_header">Please sign in</h1>
+		
+		<div class="input">
+			<h2>Login</h2>
+			<input class="login_name" type="text" name="name"/><br>
+			<h2>Password</h2>
+			<input class="password_name" type="password" name="pw"/><br>
+		</div>
+		
+		<input class="submit" type="submit" name="submit" value="Login" />
 	</form>
-	<a href="register.jsp">Not registered?</a>
+	
+	<a href="register.jsp" class="link">Register here</a>
+	</div>
 </body>
 </html>
