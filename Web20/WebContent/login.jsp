@@ -25,7 +25,7 @@
 		<input class="submit" type="submit" name="submit" value="Login" />
 	</form>
 	
-	<a href="register.jsp" class="link">Sign up here</a>
+	<a href="register.jsp" class="link">Sign up</a>
 	</div>
 </body>
 </html>

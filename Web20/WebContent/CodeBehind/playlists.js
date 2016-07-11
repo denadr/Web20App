@@ -45,6 +45,7 @@ var getIndexById = function (id)
 			return index;
 		}
 	}
+	return -1;
 }
 
 var removePlaylistId = function (playlistId)
@@ -65,7 +66,7 @@ var MasterDetailView = React.createClass(
 	getInitialState : function ()
 	{
 		return { 
-			currentPlaylistId : this.props.playlists[0].id,
+			currentPlaylistId : this.props.playlists.length > 0 ? this.props.playlists[0].id : -1,
 			changed : false
 		};
 	},
@@ -148,12 +149,40 @@ var MasterDetailView = React.createClass(
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
+		var detailView = <p>No Playlists to show.</p>;
 
 		var listCss =
 		{
 			listStyleType : 'none'
 		};
 		
+		if (playlistIndex >= 0)
+		{
+			var titlesView = <p>No Titles to show.</p>;
+			
+			if (this.props.playlists[playlistIndex].titles.length > 0)
+			{
+				titlesView = <ul style={listCss}>
+								{this.props.playlists[playlistIndex].titles.map(function(title)
+								{
+									return(
+										<li key={title.id}>
+											<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
+											<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)}>Remove</button>
+										</li>
+									);
+								}, this)
+								}
+							</ul>
+			}		
+			
+			detailView = <div>
+							<h1>{this.props.playlists[playlistIndex].name}</h1>
+							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
+							<div>{titlesView}</div>
+						</div>;
+		}
+				
 		return(
 			<table>
 				<tr>
@@ -171,21 +200,7 @@ var MasterDetailView = React.createClass(
 						}, this)}
 						</ul>
 					</td>
-					<td>
-						<h1>{this.props.playlists[playlistIndex].name}</h1>
-						<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
-						<ul style={listCss}>
-							{this.props.playlists[playlistIndex].titles.map(function(title)
-							{
-								return(
-									<li key={title.id}>
-										<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
-										<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)}>Remove</button>
-									</li>
-								);
-							}, this)}
-						</ul>
-					</td>
+					<td>{detailView}</td>
 				</tr>
 			</table>
 		);

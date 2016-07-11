@@ -50,7 +50,14 @@ var AddMenu = React.createClass(
 	{
 		if (loggedIn)
 		{
-			this.setState( { opened : !this.state.opened } );
+			if (this.props.options.length > 0)
+			{
+				this.setState( { opened : !this.state.opened } );
+			}
+			else
+			{
+				alert('Please create a Playlist first.');
+			}
 		}
 		else
 		{

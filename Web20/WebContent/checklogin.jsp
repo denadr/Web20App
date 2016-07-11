@@ -14,7 +14,6 @@
 	}
 	if(user!=null){
 		String id = String.valueOf(user.getId());
-		System.out.println(name + id);
 		%><script>
 			var username = '<%=name%>';
 			var ID = '<%=id%>';
@@ -22,9 +21,6 @@
 			localStorage.setItem('ID',ID);
 			window.location = 'search.html';
 		</script><%
-// 		RequestDispatcher rd = request.getRequestDispatcher("search.html");
-// 		rd.forward(request, response);
-// 		response.sendRedirect("search.html");
 	}
 	else{
 		%><script>alert("Password or username not correct");</script> <%

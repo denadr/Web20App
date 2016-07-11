@@ -18,7 +18,6 @@
 					localStorage.setItem('ID',ID);
 					window.location = 'search.html';
 				</script> <%
-// 				response.sendRedirect("search.html");
 			}
 			else{
 				%><script>alert("Username not free");</script><%

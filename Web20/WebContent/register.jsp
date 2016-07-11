@@ -30,7 +30,7 @@
 		
 		<input class="submit" type="submit" name="submit" value="Sign up" />
 	</form>
-	<a href="search.html" class="link">Back</a>
+	
 	</div>
 </body>
 </html>
