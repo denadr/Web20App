@@ -1,16 +1,24 @@
 var loggedIn = false;
-var userId = null;
-var userName = null;
 var playlists = null;
 
 $(document).ready(function ()
 {
-	userId = localStorage.getItem('ID');
-	if (userId != null)
+	var userId = localStorage.getItem('ID');
+	if (userId != null && userId != 'null')
 	{
 		loggedIn = true;
-		userName = localStorage.getItem('username');
+		var userName = localStorage.getItem('username');
 		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		
+		$('#menu_button').val(userName);
+		$('#menu_flyout').html('<li><a href="playlists.html">Playlists</a></li>' +
+							   '<li><a href="account.html">Account</a></li>' +
+							   '<li><a href="search.html" id="signout_button">Sign out</a></li>');
+		document.getElementById('signout_button').addEventListener('click', function()
+		{
+			localStorage.setItem('ID', null);
+			localStorage.setItem('username', null);
+		});
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
@@ -21,7 +29,13 @@ $(document).ready(function ()
 			});
 		});
 	}
-	else console.log('Not logged in.');
+	else 
+	{
+		console.log('Not logged in.');
+		
+		$('#menu_flyout').html('<li><a href="login.jsp">Sign in</a></li>' +
+    						   '<li><a href="register.jsp">Sign up</a></li>');
+	}
 });
 
 var AddMenu = React.createClass(

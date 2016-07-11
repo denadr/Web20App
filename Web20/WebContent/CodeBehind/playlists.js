@@ -1,21 +1,20 @@
-var loggedIn = false;
 var userId = null;
-var userName = null;
 var ids = [];
-
-var listCss =
-{
-	listStyleType : 'none'
-};
 
 $(document).ready(function ()
 {
 	userId = localStorage.getItem('ID');
-	if (userId != null)
+	if (userId != null && userId != 'null')
 	{
-		loggedIn = true;
-		userName = localStorage.getItem('username');
+		var userName = localStorage.getItem('username');
 		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		
+		$('#menu_button').val(userName);
+		document.getElementById('signout_button').addEventListener('click', function()
+		{
+			localStorage.setItem('ID', null);
+			localStorage.setItem('username', null);
+		});
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
@@ -31,7 +30,10 @@ $(document).ready(function ()
 			});
 		});
 	}
-	else console.log('Not logged in.');
+	else // This should not happen.
+	{
+		console.log('Not logged in.');
+	}
 });
 
 var getIndexById = function (id)
@@ -146,6 +148,11 @@ var MasterDetailView = React.createClass(
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
+
+		var listCss =
+		{
+			listStyleType : 'none'
+		};
 		
 		return(
 			<table>
