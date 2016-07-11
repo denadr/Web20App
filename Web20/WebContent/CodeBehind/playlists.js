@@ -1,7 +1,6 @@
 var loggedIn = false;
 var userId = null;
 var userName = null;
-var playlists = [];
 
 $(document).ready(function ()
 {
@@ -16,13 +15,24 @@ $(document).ready(function ()
 		{
 			getPlaylistsDeep(userId, function(lists)
 			{
-				console.log('Playlists: ' + JSON.stringify(lists));
+				for (var n = 0; n < lists.length; n++)
+				{
+					console.log(lists[n].name + ' (' + lists[n].id + '): ' + JSON.stringify(lists[n].titles));
+				}
 				
-				//ReactDOM.render(< /> , document.getElementById('playlist_view'));
+				ReactDOM.render(<MasterDetailView playlists={lists} /> , document.getElementById('playlist_view'));
 			});
 		});
 	}
 	else console.log('Not logged in.');
+});
+
+var MasterDetailView = React.createClass(
+{
+	render : function ()
+	{
+		return <a>{JSON.stringify(this.props.playlists)}</a>;
+	}
 });
 
 var MasterList = React.createClass(
