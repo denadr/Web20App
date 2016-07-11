@@ -35,9 +35,9 @@ function addPlaylist(userId, playlistName)
 	request('playlist/add/' + userId + '/' + playlistName, testCallback);
 }
 
-function deletePlaylist(playlistId)
+function deletePlaylist(playlistId, callback)
 {
-	request('playlist/delete/' + playlistId, testCallback);
+	request('playlist/delete/' + playlistId, callback);
 }
 
 function getPlaylistsFlat(userId, callback)
@@ -73,7 +73,7 @@ function addTitle(listId, descr, uri, callback)
 	});
 }
 
-function deleteTitle(playlistId, titleId)
+function deleteTitle(playlistId, titleId, callback)
 {
-	request('title/delete/' + playlistId + '/' + titleId, testCallback);
+	request('title/delete/' + playlistId + '/' + titleId, callback);
 }

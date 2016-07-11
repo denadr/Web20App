@@ -45,16 +45,82 @@ var getIndexById = function (id)
 	}
 }
 
+var removePlaylistId = function (playlistId)
+{
+	var newIds = [];
+	for (var n = 0, m = 0; n < ids.length; n++)
+	{
+		if (ids[n] != playlistId)
+		{
+			newIds[m++] = ids[n];
+		}
+	}
+	ids = newIds;
+}
+
 var MasterDetailView = React.createClass(
 {
 	getInitialState : function ()
 	{
-		return { currentPlaylistId : this.props.playlists[0].id };
+		return { 
+			currentPlaylistId : this.props.playlists[0].id,
+			changed : false
+		};
 	},
 	
 	open : function (playlistId)
 	{
-		this.setState( { currentPlaylistId : playlistId } );
+		this.setState( 
+		{ 
+			currentPlaylistId : playlistId,
+			changed : this.state.changed
+		});
+	},
+	
+	createPlaylist : function ()
+	{
+		
+	},
+
+	removePlaylist : function (playlistId)
+	{
+		var playlistIndex = getIndexById(playlistId);
+		removePlaylistId(playlistId);
+		
+		this.props.playlists.splice(playlistIndex, 1);
+		this.setState( 
+		{ 
+			currentPlaylistId : this.props.playlists[playlistIndex < this.props.playlists.length ? playlistIndex : playlistIndex - 1].id,
+			changed : !this.state.changed
+		});
+		
+		deletePlaylist(playlistId, function(response)
+		{
+			console.log('removePlaylist: ' + response.message);
+		});
+	},
+	
+	removeTitle : function (playlistId, titleId)
+	{
+		var playlistIndex = getIndexById(playlistId);
+		var titleIndex;
+		for (var n = 0; n < this.props.playlists[playlistIndex].titles.length; n++)
+		{
+			if (this.props.playlists[playlistIndex].titles[n].id == titleId)
+			{
+				this.props.playlists[playlistIndex].titles.splice(n, 1);
+				this.setState( 
+				{ 
+					currentPlaylistId : this.state.currentPlaylistId,
+					changed : !this.state.changed
+				});
+			}
+		}
+		
+		deleteTitle(playlistId, titleId, function(response)
+		{
+			console.log('removeTitle: ' + response.message);
+		});
 	},
 	
 	render : function ()
@@ -62,38 +128,37 @@ var MasterDetailView = React.createClass(
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
 		
 		return(
-			<div>
-				<ul style={listCss}>
-					{this.props.playlists.map(function(list)
-					{
-						return(
-							<li key={list.id}>
-								<a onClick={this.open.bind(this, list.id)}>{list.name}</a>
-							</li>
-						);
-					}, this)}
-				</ul>
-				<DetailView playlist={this.props.playlists[playlistIndex]} ></DetailView>
-			</div>
-		);
-	}
-});
-
-var DetailView = React.createClass(
-{
-	render : function ()
-	{
-		return(
-			<ul style={listCss}>
-				{this.props.playlist.titles.map(function(title)
-				{
-					return(
-						<li key={title.id}>
-							<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
-						</li>
-					);
-				})}
-			</ul>
+			<table>
+				<tr>
+					<td>
+						<ul style={listCss}>
+						{this.props.playlists.map(function(list)
+						{
+							return(
+								<li key={list.id}>
+									<a onClick={this.open.bind(this, list.id)}>{list.name}</a>
+									</li>
+							);
+						}, this)}
+						</ul>
+					</td>
+					<td>
+						<h1>{this.props.playlists[playlistIndex].name}</h1>
+						<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
+						<ul style={listCss}>
+							{this.props.playlists[playlistIndex].titles.map(function(title)
+							{
+								return(
+									<li key={title.id}>
+										<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
+										<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)}>Remove</button>
+									</li>
+								);
+							}, this)}
+						</ul>
+					</td>
+				</tr>
+			</table>
 		);
 	}
 });
