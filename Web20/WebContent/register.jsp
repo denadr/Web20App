@@ -19,13 +19,13 @@
 		<div class="input">
 
 		<h2>Email</h2>
-		<input type="text" name="email"/><br>
+		<input class="inputfield" type="text" name="email"/><br>
 		
 		<h2>Login</h2>
-		<input type="text" name="name" /><br>
+		<input class="inputfield" type="text" name="name" /><br>
 		
 		<h2>Password</h2>
-		<input type="password" name="pw" /><br>
+		<input class="inputfield" type="password" name="pw" /><br>
 		</div>
 		
 		<input class="submit" type="submit" name="submit" value="Register" />

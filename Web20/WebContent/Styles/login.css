@@ -13,7 +13,7 @@ body {
     vertical-align: middle;
 
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-	color: #63717f;
+	color: #92959c;
 }
 
 img {
@@ -33,7 +33,7 @@ img {
 .input {
 	display: block;
 	margin: 0px auto;
-	margin-left: 30%;
+	margin-left: 25%;
 	text-align: left;
 }
 
@@ -50,20 +50,20 @@ h2 {
 }
 
 .login_name {
-	margin-top: 0px;
+	font-size: 12.5pt;
 }
 
 .password_name {
-	margin-top: 0px;
+	font-size: 12.5pt;
 }
 
 .submit {
 	margin: 40px auto;
 	padding: 10px 40px;
-	font-size: 12pt;
+	font-size: 14pt;
 }
 
 .link {
 	font-size: 14pt;
-	color: #63717f;
+	color: #92959c;
 }

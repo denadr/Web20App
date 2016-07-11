@@ -59,7 +59,7 @@ img {
 .search_bar_label{
 	padding: 18px;
 	font-size: 15pt;
-	color: #63717f;
+	color: #92959c;
 }
 
 .search_bar_input{
@@ -69,7 +69,7 @@ img {
 	background: #2b303b;
 	border: none;
 	font-size: 15pt;
- 	color: #63717f;
+ 	color: #92959c;
  	
  	padding-left: 20px;
  	padding-right: 20px;
@@ -121,12 +121,12 @@ aside{
 	padding: 10px;
 	width: 25%;
 	text-align: center;
-	color: #63717f;
+	color: #92959c;
 }
 
 .table_header{
 	font-size: 15pt;
-	color: #63717f;
+	color: #92959c;
 	font-size: 1,5em;
 }
 

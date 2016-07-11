@@ -25,7 +25,7 @@
 .spotify_result_button {
 	width: 100%;
 	font-size: 15pt;
-    color: #63717f;
+    color: #92959c;
 	
 	padding-left: 30px;
 	padding-top: 20px;
@@ -42,7 +42,7 @@
 .soundcloud_result_button {
 	width: 100%;
 	font-size: 15pt;
-    color: #63717f;
+    color: #92959c;
 	
 	padding-left: 30px;
 	padding-top: 20px;
@@ -59,7 +59,7 @@
 .deezer_result_button {
 	width: 100%;
 	font-size: 15pt;
-    color: #63717f;
+    color: #92959c;
 	
 	padding-left: 30px;
 	padding-top: 20px;
@@ -75,19 +75,19 @@
 
 .spotify_result_button a{
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
 
 .soundcloud_result_button a{
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
 
 .deezer_result_button a{
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
 
@@ -116,7 +116,7 @@
 /* SUBMENU LISTELEMENTS TEXT */
 .widgets_spotify li a {
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
 
@@ -138,7 +138,7 @@
 /* SUBMENU LISTELEMENTS TEXT */
 .widgets_soundcloud li a {
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
 
@@ -160,6 +160,6 @@
 /* SUBMENU LISTELEMENTS TEXT */
 .widgets_deezer li a {
     font-size: 14pt;
-    color: #63717f;
+    color: #92959c;
     text-decoration: none;
 }
