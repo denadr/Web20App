@@ -1,1 +1,41 @@
 @CHARSET "ISO-8859-1";
+
+/************ Section Styles ************/
+
+body {
+	margin: 0px auto;
+	padding: 5%;
+	width: 50%;
+	max-width: 1200px;
+	min-width: 500px;
+
+	text-align: center;
+    vertical-align: middle;
+
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #92959c;
+}
+
+img {
+	border-width: 0px;
+}
+
+h1, h2 {
+	text-align: left;
+}
+
+.account {
+	padding: 5%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.delete_button {
+	margin: 40px auto;
+	padding: 10px 40px;
+	font-size: 14pt;
+}

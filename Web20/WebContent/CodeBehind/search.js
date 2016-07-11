@@ -13,7 +13,7 @@ $(document).ready(function ()
 		
 		$('#menu_button').val(userName);
 		$('#menu_flyout').html('<li><a href="playlists.html">Playlists</a></li>' +
-							   '<li><a href="account.html">Account</a></li>' +
+							   '<li><a href="account.jsp">Account</a></li>' +
 							   '<li><a href="search.html" id="signout_button">Sign out</a></li>');
 		document.getElementById('signout_button').addEventListener('click', function()
 		{

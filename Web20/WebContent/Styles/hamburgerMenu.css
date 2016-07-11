@@ -1,6 +1,6 @@
 
 .menu_bar{
-	width: 160px;
+	width: 180px;
 	height: 50px;
 	
 	position: relative;
@@ -15,7 +15,7 @@
 }
 
 .login_button {
-	width: 100px;
+	width: 120px;
 	height: 30px;
 	background: #2b303b;
 	border: none;
