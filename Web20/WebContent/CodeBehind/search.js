@@ -9,19 +9,19 @@ $(document).ready(function ()
 	if (userId != null)
 	{
 		loggedIn = true;
-		console.log('UserID : ' + userId);
 		userName = localStorage.getItem('username');
-		console.log('Username : ' + userName);
+		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
-			getPlaylists(userId, function(lists)
+			getPlaylistsFlat(userId, function(lists)
 			{
 				playlists = lists;
-				console.log(JSON.stringify(playlists));
+				console.log('Playlists: ' + JSON.stringify(playlists));
 			});
 		});
 	}
-	else console.log('userId : ' + userId);
+	else console.log('Not logged in.');
 });
 
 var AddMenu = React.createClass(

@@ -40,7 +40,7 @@ function deletePlaylist(playlistId)
 	request('playlist/delete/' + playlistId, testCallback);
 }
 
-function getPlaylists(userId, callback)
+function getPlaylistsFlat(userId, callback)
 {
 	request('playlist/getall/' + userId, function(dbResponse)
 	{
@@ -48,9 +48,12 @@ function getPlaylists(userId, callback)
 	});
 }
 
-function getPlaylist(playlistId)
+function getPlaylistsDeep(userId, callback)
 {
-	request('playlist/get/' + playlistId, testCallback);
+	request('playlist/get/' + userId, function (dbResponse)
+	{
+		callback(dbResponse.playlists);
+	});
 }
 
 //===== Title requests =====

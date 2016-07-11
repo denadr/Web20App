@@ -1,7 +1,7 @@
 var loggedIn = false;
 var userId = null;
 var userName = null;
-var playlists = null;
+var playlists = [];
 
 $(document).ready(function ()
 {
@@ -9,21 +9,34 @@ $(document).ready(function ()
 	if (userId != null)
 	{
 		loggedIn = true;
-		console.log('UserID : ' + userId);
 		userName = localStorage.getItem('username');
-		console.log('Username : ' + userName);
+		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
-			getPlaylists(userId, function(lists)
+			getPlaylistsDeep(userId, function(lists)
 			{
-				playlists = lists;
-				console.log(JSON.stringify(playlists));
+				console.log('Playlists: ' + JSON.stringify(lists));
+				
+				//ReactDOM.render(< /> , document.getElementById('playlist_view'));
 			});
 		});
 	}
-	else console.log('userId : ' + userId);
+	else console.log('Not logged in.');
 });
 
+var MasterList = React.createClass(
+{
+	render : function ()
+	{
+		
+	}
+});
 
-
-//ReactDOM.render(< /> , document.getElementById('playlist_view'));
+var DetailList = React.createClass(
+{
+	render : function ()
+	{
+		
+	}
+});
