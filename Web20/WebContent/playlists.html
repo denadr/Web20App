@@ -1,22 +1,30 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<!-- Ultimate Music Search Engine Website
-			 Author: Lars Nonnemann
-		-->
 		<meta charset="UTF-8" />
 		<title> Ultimate Music Search Engine </title>
 		
-		<script src="http://code.jquery.com/jquery-2.1.3.js"></script>
-		<script src="/Interaction/hamburgerMenu.js"></script>
-		<script src="/Web20/CodeBehind/playlists.js"></script>
+		<!-- jQuery -->
+		<script src="/Web20/Libs/jquery-2.1.3.js"></script>
+				
+		<!-- React -->
+		<script src="/Web20/Libs/react-15.2.0.js"></script>
+		<script src="/Web20/Libs/react-dom-15.2.0.js"></script>
+    	<script src="/Web20/Libs/babel-core-5.8.34-browser.js"></script>
 		
-		<link href="/Styles/playlist.css" rel="stylesheet" type="text/css" />
-		<link href="/Styles/hamburgerMenu.css" rel="stylesheet" />
+		<!-- Logic -->
+		<script type="text/babel" src="/Web20/Interaction/hamburgerMenu.js"></script>
+		<script type="text/babel" src="/Web20/Scripts/Database/database.js"></script>
+		<script type="text/babel" src="/Web20/CodeBehind/playlists.js"></script>
+		
+		<!-- Styles -->
+		<link href="/Web20/Styles/playlists.css" rel="stylesheet" />
+		<link href="/Web20/Styles/hamburgerMenu.css" rel="stylesheet" />
 	</head>
   
 	<body>
 		
+		<!-- Login Menu with drop-down Bar -->
 		<header>
 			<table class="menu_bar">
 				<tr>
@@ -27,18 +35,24 @@
     						<div class="menui bottom-menu"></div>
   						</a>
   					</td>
-					<td width="90%"><input class="konto_button" href="#" type="submit" value="Sign in" /></td>
+					<td class="menu_login_button" width="90%">
+						<input class="login_button" id="menu_button" type="submit" value="" />
+					</td>
 				</tr>
 				<tr>
-					<td width="10%" colspan="2" class="mobilenav_container">
+					<td class="mobilenav_container" colspan="2">
 						<div class="mobilenav">
-    						<li><a href="#">Login</a></li>
-    						<li><a href="#">Register</a></li>
+    						<li><a href="account.jsp">Account</a></li>
+    						<li><a href="search.html" id="signout_button">Sign out</a></li>
   						</div>
 					</td>
 				</tr>
 			</table>
 		</header>
+		
+		<div id="playlist_view"></div>
+				
+		<div id="dz-root"></div>
 		
 	</body>
 </html>

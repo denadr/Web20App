@@ -1,6 +1,6 @@
 function testDb() { request('dbtest', testCallback); }
 
-function testCallback(data) { alert(JSON.stringify(data)); }
+function testCallback(data) { console.log(JSON.stringify(data)); }
 
 function request(methodUrl, callback)
 {
@@ -13,51 +13,77 @@ function request(methodUrl, callback)
 
 // ===== User requests =====
 
-function register(email, username, password)
-{
-	request('user/register/' + email + '/' + username + '/' + password, testCallback);
-}
+//function register(email, username, password)
+//{
+//	request('user/register/' + email + '/' + username + '/' + password, testCallback);
+//}
 
-function login(username, password)
-{
-	request('user/login/' + username + '/' + password, testCallback);
-}
+//function login(username, password)
+//{
+//	request('user/login/' + username + '/' + password, testCallback);
+//}
 
-function deleteUser(userId)
+function deleteUser(userId, callback)
 {
 	request('user/delete/' + userId, testCallback);
 }
 
 //===== Playlist requests =====
 
-function addPlaylist(userId, playlistName)
+function addPlaylist(user_Id, playlistName, callback, caller)
 {
-	request('playlist/add/' + userId + '/' + playlistName, testCallback);
+	request('playlist/add/' + user_Id + '/' + playlistName, function(dbResponse)
+	{
+		var playlist =
+		{
+			id : dbResponse.playlistId,
+			userId : user_Id,
+			name : playlistName,
+			titles : []
+		};
+		callback(playlist, caller);
+	});
 }
 
-function deletePlaylist(playlistId)
+function deletePlaylist(playlistId, callback)
 {
-	request('playlist/delete/' + playlistId, testCallback);
+	request('playlist/delete/' + playlistId, callback);
 }
 
-function getPlaylists(userId)
+function getPlaylistsFlat(userId, callback)
 {
-	request('playlist/getall/' + userId, testCallback);
+	request('playlist/getall/' + userId, function(dbResponse)
+	{
+		callback(dbResponse.playlists);
+	});
 }
 
-function getPlaylist(playlistId)
+function getPlaylistsDeep(userId, callback)
 {
-	request('playlist/get/' + playlistId, testCallback);
+	request('playlist/get/' + userId, function (dbResponse)
+	{
+		callback(dbResponse.playlists);
+	});
 }
 
 //===== Title requests =====
 
-function addTitle(playlistId, description, url)
+function addTitle(listId, descr, uri, callback)
 {
-	request('title/add/' + playlistId + '/' + description + '/' + url, testCallback);
+	descr = 'DummyDescription';
+	$.ajax
+	({
+		type : 'post',
+		url : '/Web20/rest/DatabaseService/title/add',
+        contentType : 'application/json; charset=utf-8',
+        dataType : 'json',
+        data : JSON.stringify( { playlistId : listId, description : descr, url : uri } ),
+        traditional : true,
+		success : function(response) { callback(response); }
+	});
 }
 
-function deleteTitle(playlistId, titleId)
+function deleteTitle(playlistId, titleId, callback)
 {
-	request('title/delete/' + playlistId + '/' + titleId, testCallback);
+	request('title/delete/' + playlistId + '/' + titleId, callback);
 }

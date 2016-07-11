@@ -1,0 +1,65 @@
+@CHARSET "ISO-8859-1";
+
+/************ Section Styles ************/
+
+body {
+	margin: 0px auto;
+	padding: 5%;
+	width: 50%;
+	max-width: 1200px;
+	min-width: 500px;
+
+	text-align: center;
+    vertical-align: middle;
+
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	color: #92959c;
+}
+
+img {
+	border-width: 0px;
+}
+
+.register {
+	padding: 5%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.input {
+	display: block;
+	margin: 0px auto;
+	margin-left: 25%;
+	text-align: left;
+}
+
+.form_header {
+	margin: 0px auto;
+	padding: 25px;
+	text-align: center;
+    vertical-align: middle;
+}
+
+h2 {
+	margin: 0px auto;
+	padding: 20px 0px;
+}
+
+.inputfield {
+	font-size: 12.5pt;
+}
+
+.submit {
+	margin: 40px auto;
+	padding: 10px 40px;
+	font-size: 14pt;
+}
+
+.link {
+	font-size: 14pt;
+	color: #92959c;
+}

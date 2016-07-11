@@ -3,12 +3,16 @@
 <html>
     <head>
     	<meta charset="ISO-8859-1">
-    	<script src="http://code.jquery.com/jquery-latest.js"></script>
+    	<script src="https://code.jquery.com/jquery-latest.js"></script>
         <script src="https://connect.soundcloud.com/sdk/sdk-3.0.0.js"></script>
         <script src="soundcloud.js"></script>
     </head>
     <body>
-        <ul id="results"></ul>
+    <script type="text/javascript">soundcloudSearch("tracks","Seeed",5, function(result)	{
+		alert(result);
+		});
+    </script>
+<!--         <ul id="results"></ul> -->
 <!--         <div id="player"></div> -->
 
 		

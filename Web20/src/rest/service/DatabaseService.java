@@ -5,16 +5,24 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import models.Database;
+import models.Playlist;
+import models.Playlists;
+import models.Titles;
 import models.User;
 
 @Path("/DatabaseService")
@@ -47,7 +55,7 @@ public class DatabaseService
             
             return json;
         } 
-		catch (Exception e) 
+		catch (Exception e)
 		{
             return e.toString();
         }
@@ -165,26 +173,26 @@ public class DatabaseService
 	public String addPlaylist(@PathParam("userId") String userId, @PathParam("playlistName") String playlistName)
 	{
 		Database database = null;
-		String result = "{\"message\":\"";
+		String result = "{\"playlistId\":";
 		try
 		{
 			database = new Database();
-			result += database.addPlaylist(Integer.parseInt(userId), playlistName) ? "success" : "failure"; 
+			result += database.addPlaylist(Integer.parseInt(userId), playlistName); 
         } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
 			// TODO: Detailed error handling
-			result += "ClassNotFoundException";
+			result += -1;
         }  
 		catch (NumberFormatException e) // Parsing of userId failed.
 		{
 			// TODO: Detailed error handling
-			result += "NumberFormatException";
+			result += -1;
         } 
 		catch (SQLException e) // Some exception while accessing the SQL database.
 		{
 			// TODO: Detailed error handling
-			result += "SQLException";
+			result += -1;
         }
 		finally
 		{
@@ -193,7 +201,7 @@ public class DatabaseService
 				database.close();
 			}
 		}
-		return result + "\"}";
+		return result + "}";
 	}
 
 	@GET
@@ -269,18 +277,24 @@ public class DatabaseService
 		}
 		return result;
 	}
-
+	
 	@GET
 	@Path("/playlist/get/{playlistId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getPlaylist(@PathParam("playlistId") String playlistId)
+	public String getPlaylist(@PathParam("playlistId") String userId)
 	{
 		Database database = null;
 		String result = "{\"message\":\"failure\"}";
 		try
 		{
 			database = new Database();
-			result = database.getPlaylist(Integer.parseInt(playlistId)).toJsonString();
+			Playlists playlists = database.getPlaylists(Integer.parseInt(userId));
+			ArrayList<Titles> titlesLists = new ArrayList<Titles>();
+			for (Playlist playlist : playlists)
+			{
+				titlesLists.add(database.getPlaylist(playlist.getId()));
+			}
+			result = playlists.toJsonString(titlesLists);
         } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
@@ -306,35 +320,75 @@ public class DatabaseService
 		}
 		return result;
 	}
+
+//	@GET
+//	@Path("/playlist/get/{playlistId}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String getPlaylist(@PathParam("playlistId") String playlistId)
+//	{
+//		Database database = null;
+//		String result = "{\"message\":\"failure\"}";
+//		try
+//		{
+//			database = new Database();
+//			result = database.getPlaylist(Integer.parseInt(playlistId)).toJsonString();
+//        } 
+//		catch (ClassNotFoundException e) // Java driver for SQL not found.
+//		{
+//			// TODO: Detailed error handling
+//			result = "{\"message\":\"ClassNotFoundException\"}";
+//        } 
+//		catch (NumberFormatException e) // Parsing of playlistId failed.
+//		{
+//			// TODO: Detailed error handling
+//			result = "{\"message\":\"NumberFormatException\"}";
+//        }
+//		catch (SQLException e) // Some exception while accessing the SQL database.
+//		{
+//			// TODO: Detailed error handling
+//			result = "{\"message\":\"SQLException\"}";
+//        }
+//		finally
+//		{
+//			if (database != null)
+//			{
+//				database.close();
+//			}
+//		}
+//		return result;
+//	}
 	
 	// ===== Services for Title =====
 	
-	@GET
-	@Path("/title/add/{playlistId}/{description}/{url}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String addTitle(@PathParam("playlistId") String playlistId, @PathParam("description") String description, @PathParam("url") String url)
+	@POST
+	@Path("/title/add")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addTitle(String jsonString)
 	{
 		Database database = null;
 		String result = "{\"message\":\"";
 		try
 		{
+			JsonObject jsonData = (new JsonParser()).parse(jsonString).getAsJsonObject();
 			database = new Database();
-			result += database.addTitle(Integer.parseInt(playlistId), description, url) ? "success" : "failure"; 
+			result += database.addTitle(
+					jsonData.get("playlistId").getAsInt(), 
+					jsonData.get("description").getAsString(), 
+					jsonData.get("url").getAsString()) ? "success" : "failure"; 
         } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
-			// TODO: Detailed error handling
 			result += "ClassNotFoundException";
-        } 
-		catch (NumberFormatException e) // Parsing of playlistId failed.
-		{
-			// TODO: Detailed error handling
-			result += "NumberFormatException";
         }
 		catch (SQLException e) // Some exception while accessing the SQL database.
 		{
 			// TODO: Detailed error handling
 			result += "SQLException";
+        }
+		catch (Exception e)
+		{
+			result += "Exception";
         }
 		finally
 		{
@@ -344,7 +398,7 @@ public class DatabaseService
 			}
 		}
 		return result + "\"}";
-	}
+}
 
 	@GET
 	@Path("/title/delete/{playlistId}/{titleId}")

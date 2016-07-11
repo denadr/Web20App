@@ -1,0 +1,165 @@
+.reply_bar{
+	margin: 5px auto;
+	width: 100%;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+/* DROP DOWN ANIMATION */
+.spotify-animate {
+	opacity: 0.8;    
+}
+.soundcloud-animate {
+    opacity: 0.8;
+}
+.deezer-animate {
+    opacity: 0.8;
+}
+
+/* DROP DOWN HEADER */
+
+.spotify_result_button {
+	width: 100%;
+	font-size: 15pt;
+    color: #92959c;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.soundcloud_result_button {
+	width: 100%;
+	font-size: 15pt;
+    color: #92959c;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.deezer_result_button {
+	width: 100%;
+	font-size: 15pt;
+    color: #92959c;
+	
+	padding-left: 30px;
+	padding-top: 20px;
+	padding-bottom: 15px;
+	margin: 10px auto;
+	
+	background: #2b303b;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
+}
+
+.spotify_result_button a{
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
+
+.soundcloud_result_button a{
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
+
+.deezer_result_button a{
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
+
+/* ANIMATION */
+.menui {
+    transition: 0.6s ease;
+    transition-timing-function: cubic-bezier(.75, 0, .29, 1.01);
+    margin-top: 6px;
+}
+
+/* SUBMENU FOR SPOTIFY */
+.widgets_spotify {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_spotify li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_spotify li a {
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
+
+/* SUBMENU FOR SOUNDCLOUD */
+.widgets_soundcloud {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_soundcloud li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_soundcloud li a {
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
+
+/* SUBMENU FOR DEEZER */
+.widgets_deezer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+}
+
+/* SUBMENU LISTELEMENTS */
+.widgets_deezer li {
+    list-style-type: none;
+    padding: 8px;
+    text-align: right;
+}
+
+/* SUBMENU LISTELEMENTS TEXT */
+.widgets_deezer li a {
+    font-size: 14pt;
+    color: #92959c;
+    text-decoration: none;
+}
