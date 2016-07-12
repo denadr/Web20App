@@ -255,12 +255,15 @@ var MasterDetailView = React.createClass(
 							</ul>
 			}		
 			
+			var shareLink = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
+			var twitterLink = 'https://twitter.com/share?text=' + this.props.playlists[playlistIndex].name;
+			
 			detailView = <div>
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
 							<div>
 								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
-								<a className="twitter-share-button" href="https://twitter.com/share?text=PlaylistName" data-url="https://localhost:8443/Web20/playlist.html?id=">Tweet</a>
+								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
 							</div>	
 							<div>{titlesView}</div>
 						</div>;
@@ -287,5 +290,10 @@ var MasterDetailView = React.createClass(
 				</tr></tbody>
 			</table>
 		);
+	},
+	
+	componentDidMount : function ()
+	{
+		window.twttr.widgets.load();
 	}
 });
