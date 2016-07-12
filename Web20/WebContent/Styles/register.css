@@ -55,8 +55,15 @@ h2 {
 
 .submit {
 	margin: 40px auto;
-	padding: 10px 40px;
 	font-size: 14pt;
+	padding: 15px 40px;
+	
+	color: #92959c;
+	background: #495366;
+	border: 0;
+	-webkit-border-radius: 10px;
+ 	-moz-border-radius: 10px;
+  	border-radius: 10px;
 }
 
 .link {
