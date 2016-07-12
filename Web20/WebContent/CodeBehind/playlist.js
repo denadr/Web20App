@@ -46,14 +46,40 @@ var PlaylistView = React.createClass(
 			listStyleType : 'none'
 		};
 		
+		var listElemCss =
+		{
+			marginBottom: '10px'
+		};
+		
+		var detailViewCss =
+		{
+			margin: '50px auto',
+			padding: '5% 10%',
+			width: '50%',
+			textAlign: 'center',
+			verticalAlign: 'middle',
+		    
+			fontFamily: 'Lucida Sans Unicode, Lucida Grande, sans-serif',
+			
+			color: '#92959c',
+		    background: '#2b303b',
+		    borderWidth: '0',
+			borderRadius: '10px'
+		};
+		
+		var headingCss =
+		{
+			marginBottom: '30px'	
+		};
+		
 		return(
-			<div>
-				<h1>{this.props.playlist.name}</h1>
+			<div style={detailViewCss}>
+				<h1 style={headingCss}>{this.props.playlist.name}</h1>
 				<ul style={listCss}>
 					{this.props.playlist.titles.map(function(title)
 						{
 							return(
-								<li key={title.id}>
+								<li key={title.id} style={listElemCss}>
 									<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
 								</li>
 							);

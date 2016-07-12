@@ -205,6 +205,7 @@ var MasterDetailView = React.createClass(
 		
 		var bodyCss =
 		{
+			margin: '50px auto',
 			textAlign: 'top',
 			verticalAlign: 'top',
 			fontFamily: 'Lucida Sans Unicode, Lucida Grande, sans-serif'
@@ -287,7 +288,8 @@ var MasterDetailView = React.createClass(
 		
 		var widgetCss =
 		{
-			verticalAlign: 'middle'
+			verticalAlign: 'middle',
+			marginBottom: '10px'
 		};
 		
 		var newButtonCss =
