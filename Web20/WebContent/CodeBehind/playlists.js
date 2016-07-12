@@ -192,56 +192,51 @@ var MasterDetailView = React.createClass(
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
 		var detailView = <p>No Playlist to show</p>;
-
-		var buttonCss =
-		{
-			backgroundColor : '#4CAF50',
-	    	color : 'white',
-	    	padding : '2%',
-	    	fontSize : '12pt',
-			border : 'none',
-	    	cursor : 'pointer'
-		};
-		
-		var contentCss =
-		{
-			display : this.state.opened ? 'block' : 'none',
-	    	position : 'absolute',
-	    	backgroundColor : '#F9F9F9',
-	    	minWidth : '160px',
-	    	overflow : 'auto',
-	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
-	    	right : 0
-		};
-
-		var optionCss =
-		{
-			color : 'black',
-	    	padding : '12px 16px',
-	    	textDecoration : 'none',
-	    	display : 'block'
-		};
 		
 		var listCss =
 		{
 			listStyleType : 'none'
 		};
 		
+		var listElemCss =
+		{
+			marginBottom: '15px'
+		};
+		
 		var bodyCss =
 		{
+			textAlign: 'top',
+			verticalAlign: 'top',
 			fontFamily: 'Lucida Sans Unicode, Lucida Grande, sans-serif'
 		};
 		
 		var asideListCss =
 		{
-			
+			width: '25%'
+		};
+		
+//		var heart =
+//		{
+//			marginRight: '10px',
+//			float: 'left'
+//		};
+		
+		var playlist =
+		{
+			fontSize: '12pt'
+		};
+		
+		var namingCss =
+		{
+			margin: '10px',
+			padding: '5px 0px',
+			fontSize: '12pt'
 		};
 		
 		var detailViewCss =
 		{
-			margin: '50px',
 			padding: '5% 10%',
-			width: '75%',
+			width: '50%',
 		    
 			color: '#92959c',
 		    background: '#2b303b',
@@ -249,23 +244,82 @@ var MasterDetailView = React.createClass(
 			borderRadius: '10px'
 		};
 		
+		var headingCss =
+		{
+			width: '95%'
+		};
+		
+		var buttonCss =
+		{
+			width: '5%'
+		};
+		
+		var deleteButtonCss =
+		{
+			display: 'inlineblock',
+			position: 'relative',
+			float: 'right',
+			padding: '2.5% 5%',
+		
+			fontSize: '12pt',
+			color: '#92959c',
+			background: '#495366',
+			borderWidth: '0',
+	  		borderRadius: '10px'
+		};
+		
+		var subheadingCss =
+		{
+			fontSize: '10pt'
+		};
+		
+		var shareLinksCss =
+		{
+			
+		};
+		
 		var titlesViewCss =
 		{
+			display: 'block',
 			textAlign: 'center',
 			verticalAlign: 'middle'
 		};
 		
 		var widgetCss =
 		{
-			float : 'right'
+			verticalAlign: 'middle'
+		};
+		
+		var newButtonCss =
+		{
+			fontSize: '12pt',
+			padding: '2.5% 5%',
+		
+			color: '#92959c',
+			background: '#495366',
+			borderWidth: '0',
+	  		borderRadius: '10px'
+		};
+		
+		var removeButtonCss =
+		{
+			display: 'block',
+			float: 'right',
+			padding: '2%',
+			verticalAlign: 'middle',
+			
+			backgroundColor: '#4CAF50',
+		    color: 'white',
+		    fontSize: '12pt',
+		    borderWidth: '0'
 		};
 		
 		var facebookCss =
 		{
-			border : 'none',
-			overflow : 'hidden',
-			width : 60,
-			height : 20
+			border: 'none',
+			overflow: 'hidden',
+			width: 60,
+			height: 20
 		};
 
 		if (playlistIndex >= 0)
@@ -280,7 +334,7 @@ var MasterDetailView = React.createClass(
 									return(
 										<li key={title.id} style={widgetCss}>
 											<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
-											<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)} style={buttonCss}>Remove</button>
+											<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)} style={removeButtonCss}>Remove</button>
 										</li>
 									);
 								}, this)
@@ -293,12 +347,15 @@ var MasterDetailView = React.createClass(
 			var facebookLink = 'https://www.facebook.com/plugins/share_button.php?href=' + escape(shareLink) + '&layout=button&mobile_iframe=true&width=60&height=20&appId';
 			
 			detailView = <div>
-							<h1>{this.props.playlists[playlistIndex].name}</h1>
-							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={buttonCss}>Delete</button>
-							<div>
-								<iframe src={facebookLink} style={facebookCss}></iframe>								
-								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
-							</div>	
+							<table>
+								<td style={headingCss}><h1>{this.props.playlists[playlistIndex].name}</h1></td>
+								<td style={buttonCss}><button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={deleteButtonCss}>Delete Playlist</button></td>
+							</table>
+							<table>
+								<td style={subheadingCss}><h2>Share the playlist with your friends: </h2></td>
+								<td style={shareLinksCss}><iframe src={facebookLink} style={facebookCss}></iframe>								
+								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a></td>
+							</table>	
 							<div style={titlesViewCss}>{titlesView}</div>
 						</div>;
 		}
@@ -307,19 +364,19 @@ var MasterDetailView = React.createClass(
 			<table style={bodyCss}>
 				<tbody><tr>
 					<td style={asideListCss}>
-						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
-						<button onClick={this.createPlaylist} style={buttonCss}>New</button>
+						<input type="text" id="newPlaylistName" placeholder="Playlist name..." style={namingCss}></input>
+						<button onClick={this.createPlaylist} style={newButtonCss}>New</button>
 						
-						<ul style={listCss}>
+						<ol>
 						{this.props.playlists.map(function(list)
 						{
 							return(
-								<li key={list.id}>
-									<a onClick={this.open.bind(this, list.id)}>{list.name}</a>
+								<li key={list.id} style={listElemCss}>
+									<a onClick={this.open.bind(this, list.id)} style={playlist}>{list.name}</a>
 								</li>
 							);
 						}, this)}
-						</ul>
+						</ol>
 					</td>
 					
 					<td style={detailViewCss}>{detailView}</td>
