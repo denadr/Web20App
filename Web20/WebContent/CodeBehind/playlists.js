@@ -158,36 +158,6 @@ var MasterDetailView = React.createClass(
 		});
 	},
 	
-//	shareFacebook : function (playlistId)
-//	{
-//		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
-//		console.log('shareFacebook: ' + link);
-//		
-//		// TODO: call facebook share functionality
-//				
-//		this.setState( 
-//		{ 
-//			currentPlaylistId : this.state.currentPlaylistId,
-//			changed : this.state.changed,
-//			opened : false
-//		});
-//	},
-//	
-//	shareTwitter : function (playlistId)
-//	{
-//		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
-//		console.log('shareTwitter: ' + link);
-//		
-//		// TODO: call twitter share functionality
-//		
-//		this.setState( 
-//		{ 
-//			currentPlaylistId : this.state.currentPlaylistId,
-//			changed : this.state.changed,
-//			opened : false
-//		});
-//	},
-	
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
@@ -347,15 +317,23 @@ var MasterDetailView = React.createClass(
 			var facebookLink = 'https://www.facebook.com/plugins/share_button.php?href=' + escape(shareLink) + '&layout=button&mobile_iframe=true&width=60&height=20&appId';
 			
 			detailView = <div>
-							<table>
-								<td style={headingCss}><h1>{this.props.playlists[playlistIndex].name}</h1></td>
-								<td style={buttonCss}><button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={deleteButtonCss}>Delete Playlist</button></td>
-							</table>
-							<table>
-								<td style={subheadingCss}><h2>Share the playlist with your friends: </h2></td>
-								<td style={shareLinksCss}><iframe src={facebookLink} style={facebookCss}></iframe>								
-								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a></td>
-							</table>	
+							<table><tbody><tr>
+								<td style={headingCss}>
+									<h1>{this.props.playlists[playlistIndex].name}</h1>
+								</td>
+								<td style={buttonCss}>
+									<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={deleteButtonCss}>Delete Playlist</button>
+								</td>
+							</tr></tbody></table>
+							<table><tbody><tr>
+								<td style={subheadingCss}>
+									<h2>Share the playlist with your friends: </h2>
+								</td>
+								<td style={shareLinksCss}>
+									<iframe src={facebookLink} style={facebookCss}></iframe>								
+									<div id="tweet_button"><a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink} data-hashtags="UMSE">Tweet</a></div>
+								</td>
+							</tr></tbody></table>	
 							<div style={titlesViewCss}>{titlesView}</div>
 						</div>;
 		}
@@ -389,5 +367,24 @@ var MasterDetailView = React.createClass(
 	componentDidMount : function ()
 	{
 		window.twttr.widgets.load();
+	},
+	
+	componentDidUpdate : function ()
+	{
+		var playlistIndex = getIndexById(this.state.currentPlaylistId);
+		if (playlistIndex >= 0)
+		{
+			var shareLink = window.location.protocol + '//' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
+			var twitterLink = 'https://twitter.com/share?text=' + this.props.playlists[playlistIndex].name + '&url=' + escape(shareLink);
+			
+			$('#tweet_button').html('');
+			$('#tweet_button').html('<a data-twitter-extracted-i146835363954740267="true" data-hashtags="UMSE" href="' + twitterLink + '" class="twitter-share-button">Tweet</a>');
+			
+			//console.log('componentDidUpdate: ' + $('#tweet_button').html());
+			window.twttr.ready(function(twttr)
+			{
+				twttr.widgets.load();
+			});
+		}
 	}
 });
