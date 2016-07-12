@@ -194,6 +194,31 @@ public class Database
         return getTitles(titleIds);
 	}
 	
+	public String getPlaylistAsJson(int playlistId) throws SQLException
+	{
+		String playlistName = null;
+		ResultSet results = sqlStatement.executeQuery(String.format(
+				"SELECT Name FROM %s WHERE Id = %d", playlistTable, playlistId));
+		if (results.next())
+		{
+			playlistName = results.getString("Name");
+		}
+		results.close();
+		
+		ArrayList<Integer> titleIds = new ArrayList<Integer>();		
+        results = sqlStatement.executeQuery(String.format(
+        		"SELECT Title_Id FROM %s WHERE Playlist_Id = %d", playlistToTitleTable, playlistId));
+        while (results.next())
+        {
+        	titleIds.add(results.getInt("Title_Id"));
+        }
+        results.close();
+        
+        String result = "{\"playlist\":{\"name\":\"" + playlistName + "\", " + getTitles(titleIds).toJsonString() + "}}";
+        
+        return result;
+	}
+	
 	// ===== Preparation functions for Title =====
 	
 	public boolean addTitle(int playlistId, String description, String url) throws SQLException

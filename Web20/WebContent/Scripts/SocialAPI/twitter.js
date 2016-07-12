@@ -1,16 +1,29 @@
-
-//This File contains the code for the Twitter sharing button 
- 
-!function(d,s,id)
+function init_twitter(doc, src, id)
 {
-	var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
-	if(!d.getElementById(id))
-	{
-		js=d.createElement(s);
-		js.id=id;
-		js.src=p+'://platform.twitter.com/widgets.js';
-		fjs.parentNode.insertBefore(js,fjs);
-	}
+	console.log('init_twitter()');
+  	
+	var js;
+	var fjs = doc.getElementsByTagName(src)[0];
+    var twitter = window.twttr || {};
+  	
+    if (doc.getElementById(id)) 
+  	{
+  		return twitter;
+  	}
+    
+  	js = doc.createElement(src);
+  	js.id = id;
+  	js.src = 'https://platform.twitter.com/widgets.js';
+  	
+  	fjs.parentNode.insertBefore(js, fjs);
+ 
+  	twitter._e = [];
+  	twitter.ready = function (f) 
+  	{
+    	t._e.push(f);
+  	};
+  	
+  	return twitter;
 }
-(document, 'script', 'twitter-wjs');
 
+window.twttr = init_twitter(document, 'script', 'twitter-wjs');

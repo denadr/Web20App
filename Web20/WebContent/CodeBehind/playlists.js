@@ -7,7 +7,7 @@ $(document).ready(function ()
 	if (userId != null && userId != 'null')
 	{
 		var userName = localStorage.getItem('username');
-		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		//console.log('Logged in: ' + userName + ' (' + userId + ')');
 		
 		$('#menu_button').val(userName);
 		document.getElementById('signout_button').addEventListener('click', function()
@@ -15,6 +15,8 @@ $(document).ready(function ()
 			localStorage.setItem('ID', null);
 			localStorage.setItem('username', null);
 		});
+		
+		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
@@ -32,7 +34,7 @@ $(document).ready(function ()
 	}
 	else // This should not happen.
 	{
-		console.log('Not logged in.');
+		//console.log('Not logged in.');
 	}
 });
 
@@ -67,16 +69,23 @@ var MasterDetailView = React.createClass(
 	{
 		return { 
 			currentPlaylistId : this.props.playlists.length > 0 ? this.props.playlists[0].id : -1,
-			changed : false
+			changed : false,
+			opened : false,
 		};
 	},
 	
+	dropDown : function ()
+	{
+		this.setState( { opened : !this.state.opened } );
+	},
+
 	open : function (playlistId)
 	{
 		this.setState( 
 		{ 
 			currentPlaylistId : playlistId,
-			changed : this.state.changed
+			changed : this.state.changed,
+			opened : this.state.opened
 		});
 	},
 	
@@ -96,7 +105,8 @@ var MasterDetailView = React.createClass(
 				self.setState( 
 				{ 
 					currentPlaylistId : playlist.id,
-					changed : self.state.changed
+					changed : self.state.changed,
+					opened : self.state.opened
 				});
 						
 				console.log('createPlaylist: success -> ' + JSON.stringify(playlist));
@@ -114,7 +124,8 @@ var MasterDetailView = React.createClass(
 		this.setState( 
 		{ 
 			currentPlaylistId : this.props.playlists[playlistIndex < this.props.playlists.length ? playlistIndex : playlistIndex - 1].id,
-			changed : this.state.changed
+			changed : this.state.changed,
+			opened : this.state.opened
 		});
 		
 		deletePlaylist(playlistId, function(response)
@@ -135,7 +146,8 @@ var MasterDetailView = React.createClass(
 				this.setState( 
 				{ 
 					currentPlaylistId : this.state.currentPlaylistId,
-					changed : !this.state.changed
+					changed : !this.state.changed,
+					opened : this.state.opened
 				});
 			}
 		}
@@ -146,16 +158,83 @@ var MasterDetailView = React.createClass(
 		});
 	},
 	
+	shareFacebook : function (playlistId)
+	{
+		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+		console.log('shareFacebook: ' + link);
+		
+		// TODO: call facebook share functionality
+				
+		this.setState( 
+		{ 
+			currentPlaylistId : this.state.currentPlaylistId,
+			changed : this.state.changed,
+			opened : false
+		});
+	},
+	
+	shareTwitter : function (playlistId)
+	{
+		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+		console.log('shareTwitter: ' + link);
+		
+		// TODO: call twitter share functionality
+		
+		this.setState( 
+		{ 
+			currentPlaylistId : this.state.currentPlaylistId,
+			changed : this.state.changed,
+			opened : false
+		});
+	},
+	
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
 		var detailView = <p>No Playlists to show.</p>;
 
+		var buttonCss =
+		{
+			backgroundColor : '#4CAF50',
+	    	color : 'white',
+	    	padding : 16,
+	    	fontSize : 16,
+			border : 'none',
+	    	cursor : 'pointer'
+		};
+		
+		var contentCss =
+		{
+			display : this.state.opened ? 'block' : 'none',
+	    	position : 'absolute',
+	    	backgroundColor : '#F9F9F9',
+	    	minWidth : 160,
+	    	overflow : 'auto',
+	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
+	    	right : 0
+		};
+
+		var optionCss =
+		{
+			color : 'black',
+	    	padding : '12px 16px',
+	    	textDecoration : 'none',
+	    	display : 'block'
+		};
+		
 		var listCss =
 		{
 			listStyleType : 'none'
 		};
 		
+		var facebookCss =
+		{
+			border : 'none',
+			overflow : 'hidden',
+			width : 60,
+			height : 20
+		};
+
 		if (playlistIndex >= 0)
 		{
 			var titlesView = <p>No Titles to show.</p>;
@@ -176,16 +255,23 @@ var MasterDetailView = React.createClass(
 							</ul>
 			}		
 			
+			var shareLink = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
+			var twitterLink = 'https://twitter.com/share?text=' + this.props.playlists[playlistIndex].name;
+			
 			detailView = <div>
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
+							<div>
+								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
+								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
+							</div>	
 							<div>{titlesView}</div>
 						</div>;
 		}
 				
 		return(
 			<table>
-				<tr>
+				<tbody><tr>
 					<td>
 						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
 						<button onClick={this.createPlaylist}>New</button>
@@ -201,8 +287,13 @@ var MasterDetailView = React.createClass(
 						</ul>
 					</td>
 					<td>{detailView}</td>
-				</tr>
+				</tr></tbody>
 			</table>
 		);
+	},
+	
+	componentDidMount : function ()
+	{
+		window.twttr.widgets.load();
 	}
 });
