@@ -290,12 +290,13 @@ var MasterDetailView = React.createClass(
 			
 			var shareLink = window.location.protocol + '//' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
 			var twitterLink = 'https://twitter.com/share?text=' + this.props.playlists[playlistIndex].name;
+			var facebookLink = 'https://www.facebook.com/plugins/share_button.php?href=' + escape(shareLink) + '&layout=button&mobile_iframe=true&width=60&height=20&appId';
 			
 			detailView = <div>
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={buttonCss}>Delete</button>
 							<div>
-								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
+								<iframe src={facebookLink} style={facebookCss}></iframe>								
 								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
 							</div>	
 							<div style={titlesViewCss}>{titlesView}</div>
