@@ -12,9 +12,9 @@ $(document).ready(function ()
 		console.log('Logged in: ' + userName + ' (' + userId + ')');
 		
 		$('#menu_button').val(userName);
-		$('#menu_flyout').html('<li><a href="playlists.html">Playlists</a></li>' +
+		$('#menu_flyout').html('<ul><li><a href="playlists.html">Playlists</a></li>' +
 							   '<li><a href="account.jsp">Account</a></li>' +
-							   '<li><a href="search.html" id="signout_button">Sign out</a></li>');
+							   '<li><a href="search.html" id="signout_button">Sign out</a></li></ul>');
 		document.getElementById('signout_button').addEventListener('click', function()
 		{
 			localStorage.setItem('ID', null);
@@ -34,8 +34,8 @@ $(document).ready(function ()
 	{
 		console.log('Not logged in.');
 		
-		$('#menu_flyout').html('<li><a href="login.jsp">Sign in</a></li>' +
-    						   '<li><a href="register.jsp">Sign up</a></li>');
+		$('#menu_flyout').html('<ul><li><a href="login.jsp">Sign in</a></li>' +
+    						   '<li><a href="register.jsp">Sign up</a></li></ul>');
 	}
 });
 
@@ -158,7 +158,7 @@ var WidgetContainer = React.createClass(
 var search_button_click = function ()
 {
 	var query = $('#searchQuery').val();
-	var maxResults = 3;
+	var maxResults = 10;
 	
 	deezerSearch('track', query, maxResults, function (result)
 	{
