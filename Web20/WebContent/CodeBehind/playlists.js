@@ -16,6 +16,15 @@ $(document).ready(function ()
 			localStorage.setItem('username', null);
 		});
 		
+		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function()
+		{
+			console.log('Loaded local facebook.js.');	
+		});
+		$.getScript('/Web20/Scripts/SocialAPI/twitter.js', function()
+		{
+			console.log('Loaded local twitter.js.');
+		});
+		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
 			getPlaylistsDeep(userId, function(lists)
@@ -67,16 +76,23 @@ var MasterDetailView = React.createClass(
 	{
 		return { 
 			currentPlaylistId : this.props.playlists.length > 0 ? this.props.playlists[0].id : -1,
-			changed : false
+			changed : false,
+			opened : false,
 		};
 	},
 	
+	dropDown : function ()
+	{
+		this.setState( { opened : !this.state.opened } );
+	},
+
 	open : function (playlistId)
 	{
 		this.setState( 
 		{ 
 			currentPlaylistId : playlistId,
-			changed : this.state.changed
+			changed : this.state.changed,
+			opened : this.state.opened
 		});
 	},
 	
@@ -96,7 +112,8 @@ var MasterDetailView = React.createClass(
 				self.setState( 
 				{ 
 					currentPlaylistId : playlist.id,
-					changed : self.state.changed
+					changed : self.state.changed,
+					opened : self.state.opened
 				});
 						
 				console.log('createPlaylist: success -> ' + JSON.stringify(playlist));
@@ -114,7 +131,8 @@ var MasterDetailView = React.createClass(
 		this.setState( 
 		{ 
 			currentPlaylistId : this.props.playlists[playlistIndex < this.props.playlists.length ? playlistIndex : playlistIndex - 1].id,
-			changed : this.state.changed
+			changed : this.state.changed,
+			opened : this.state.opened
 		});
 		
 		deletePlaylist(playlistId, function(response)
@@ -135,7 +153,8 @@ var MasterDetailView = React.createClass(
 				this.setState( 
 				{ 
 					currentPlaylistId : this.state.currentPlaylistId,
-					changed : !this.state.changed
+					changed : !this.state.changed,
+					opened : this.state.opened
 				});
 			}
 		}
@@ -146,11 +165,70 @@ var MasterDetailView = React.createClass(
 		});
 	},
 	
+	shareFacebook : function (playlistId)
+	{
+		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+		console.log('shareFacebook: ' + link);
+		
+		// TODO: call facebook share functionality
+				
+		this.setState( 
+		{ 
+			currentPlaylistId : this.state.currentPlaylistId,
+			changed : this.state.changed,
+			opened : false
+		});
+	},
+	
+	shareTwitter : function (playlistId)
+	{
+		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+		console.log('shareTwitter: ' + link);
+		
+		// TODO: call twitter share functionality
+		
+		this.setState( 
+		{ 
+			currentPlaylistId : this.state.currentPlaylistId,
+			changed : this.state.changed,
+			opened : false
+		});
+	},
+	
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
 		var detailView = <p>No Playlists to show.</p>;
 
+		var buttonCss =
+		{
+			backgroundColor : '#4CAF50',
+	    	color : 'white',
+	    	padding : 16,
+	    	fontSize : 16,
+			border : 'none',
+	    	cursor : 'pointer'
+		};
+		
+		var contentCss =
+		{
+			display : this.state.opened ? 'block' : 'none',
+	    	position : 'absolute',
+	    	backgroundColor : '#F9F9F9',
+	    	minWidth : 160,
+	    	overflow : 'auto',
+	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
+	    	right : 0
+		};
+
+		var optionCss =
+		{
+			color : 'black',
+	    	padding : '12px 16px',
+	    	textDecoration : 'none',
+	    	display : 'block'
+		};
+		
 		var listCss =
 		{
 			listStyleType : 'none'
@@ -179,6 +257,13 @@ var MasterDetailView = React.createClass(
 			detailView = <div>
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
+							<div>
+								<button style={buttonCss} onClick={this.dropDown}>Share</button>
+								<div style={contentCss}>
+									<a style={optionCss} onClick={this.shareFacebook.bind(this, this.props.playlists[playlistIndex].id)}>Facebook</a>
+									<a style={optionCss} onClick={this.shareTwitter.bind(this, this.props.playlists[playlistIndex].id)}>Twitter</a>
+								</div>
+							</div>	
 							<div>{titlesView}</div>
 						</div>;
 		}
