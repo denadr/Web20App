@@ -98,16 +98,16 @@ var AddMenu = React.createClass(
 		{
 			display : this.state.opened ? 'block' : 'none',
 	    	position : 'absolute',
-	    	backgroundColor : '#F9F9F9',
-	    	minWidth : 160,
+	    	backgroundColor: '#92959c',
+	    	minWidth : '160',
 	    	overflow : 'auto',
-	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
-	    	right : 0
+	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.5)',
+	    	right : '0'
 		};
 
 		var optionCss =
 		{
-			color : 'black',
+			color: 'white',
 	    	padding : '12px 16px',
 	    	textDecoration : 'none',
 	    	display : 'block'
