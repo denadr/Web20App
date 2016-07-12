@@ -227,6 +227,14 @@ var MasterDetailView = React.createClass(
 			listStyleType : 'none'
 		};
 		
+		var facebookCss =
+		{
+			border : 'none',
+			overflow : 'hidden',
+			width : 60,
+			height : 20
+		};
+
 		if (playlistIndex >= 0)
 		{
 			var titlesView = <p>No Titles to show.</p>;
@@ -251,12 +259,8 @@ var MasterDetailView = React.createClass(
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
 							<div>
-								<button style={buttonCss} onClick={this.dropDown}>Share</button>
+								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
 								<a className="twitter-share-button" href="https://twitter.com/share?text=PlaylistName" data-url="https://localhost:8443/Web20/playlist.html?id=">Tweet</a>
-								<div style={contentCss}>
-									<a style={optionCss} onClick={this.shareFacebook.bind(this, this.props.playlists[playlistIndex].id)}>Facebook</a>
-									
-								</div>
 							</div>	
 							<div>{titlesView}</div>
 						</div>;
