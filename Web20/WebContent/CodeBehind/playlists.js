@@ -16,7 +16,7 @@ $(document).ready(function ()
 			localStorage.setItem('username', null);
 		});
 		
-		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
+		//$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
@@ -158,47 +158,47 @@ var MasterDetailView = React.createClass(
 		});
 	},
 	
-	shareFacebook : function (playlistId)
-	{
-		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
-		console.log('shareFacebook: ' + link);
-		
-		// TODO: call facebook share functionality
-				
-		this.setState( 
-		{ 
-			currentPlaylistId : this.state.currentPlaylistId,
-			changed : this.state.changed,
-			opened : false
-		});
-	},
-	
-	shareTwitter : function (playlistId)
-	{
-		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
-		console.log('shareTwitter: ' + link);
-		
-		// TODO: call twitter share functionality
-		
-		this.setState( 
-		{ 
-			currentPlaylistId : this.state.currentPlaylistId,
-			changed : this.state.changed,
-			opened : false
-		});
-	},
+//	shareFacebook : function (playlistId)
+//	{
+//		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+//		console.log('shareFacebook: ' + link);
+//		
+//		// TODO: call facebook share functionality
+//				
+//		this.setState( 
+//		{ 
+//			currentPlaylistId : this.state.currentPlaylistId,
+//			changed : this.state.changed,
+//			opened : false
+//		});
+//	},
+//	
+//	shareTwitter : function (playlistId)
+//	{
+//		var link = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + playlistId;
+//		console.log('shareTwitter: ' + link);
+//		
+//		// TODO: call twitter share functionality
+//		
+//		this.setState( 
+//		{ 
+//			currentPlaylistId : this.state.currentPlaylistId,
+//			changed : this.state.changed,
+//			opened : false
+//		});
+//	},
 	
 	render : function ()
 	{
 		var playlistIndex = getIndexById(this.state.currentPlaylistId);
-		var detailView = <p>No Playlists to show.</p>;
+		var detailView = <p>No Playlist to show</p>;
 
 		var buttonCss =
 		{
 			backgroundColor : '#4CAF50',
 	    	color : 'white',
-	    	padding : 16,
-	    	fontSize : 16,
+	    	padding : '2%',
+	    	fontSize : '12pt',
 			border : 'none',
 	    	cursor : 'pointer'
 		};
@@ -208,7 +208,7 @@ var MasterDetailView = React.createClass(
 			display : this.state.opened ? 'block' : 'none',
 	    	position : 'absolute',
 	    	backgroundColor : '#F9F9F9',
-	    	minWidth : 160,
+	    	minWidth : '160px',
 	    	overflow : 'auto',
 	    	boxShadow : '0px 8px 16px 0px rgba(0,0,0,0.2)',
 	    	right : 0
@@ -227,6 +227,39 @@ var MasterDetailView = React.createClass(
 			listStyleType : 'none'
 		};
 		
+		var bodyCss =
+		{
+			fontFamily: 'Lucida Sans Unicode, Lucida Grande, sans-serif'
+		};
+		
+		var asideListCss =
+		{
+			
+		};
+		
+		var detailViewCss =
+		{
+			margin: '50px',
+			padding: '5% 10%',
+			width: '75%',
+		    
+			color: '#92959c',
+		    background: '#2b303b',
+		    borderWidth: '0',
+			borderRadius: '10px'
+		};
+		
+		var titlesViewCss =
+		{
+			textAlign: 'center',
+			verticalAlign: 'middle'
+		};
+		
+		var widgetCss =
+		{
+			float : 'right'
+		};
+		
 		var facebookCss =
 		{
 			border : 'none',
@@ -237,7 +270,7 @@ var MasterDetailView = React.createClass(
 
 		if (playlistIndex >= 0)
 		{
-			var titlesView = <p>No Titles to show.</p>;
+			var titlesView = <p>No Titles to show</p>;
 			
 			if (this.props.playlists[playlistIndex].titles.length > 0)
 			{
@@ -245,9 +278,9 @@ var MasterDetailView = React.createClass(
 								{this.props.playlists[playlistIndex].titles.map(function(title)
 								{
 									return(
-										<li key={title.id}>
+										<li key={title.id} style={widgetCss}>
 											<iframe frameBorder="0" allowTransparency="true" scrolling="no" width="250" height="80" src={title.url}></iframe>
-											<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)}>Remove</button>
+											<button onClick={this.removeTitle.bind(this, this.props.playlists[playlistIndex].id, title.id)} style={buttonCss}>Remove</button>
 										</li>
 									);
 								}, this)
@@ -255,26 +288,28 @@ var MasterDetailView = React.createClass(
 							</ul>
 			}		
 			
-			var shareLink = window.location.protocol + '://' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
+			var shareLink = window.location.protocol + '//' + window.location.host + '/Web20/playlist.html?id=' + this.props.playlists[playlistIndex].id;
 			var twitterLink = 'https://twitter.com/share?text=' + this.props.playlists[playlistIndex].name;
+			var facebookLink = 'https://www.facebook.com/plugins/share_button.php?href=' + escape(shareLink) + '&layout=button&mobile_iframe=true&width=60&height=20&appId';
 			
 			detailView = <div>
 							<h1>{this.props.playlists[playlistIndex].name}</h1>
-							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
+							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)} style={buttonCss}>Delete</button>
 							<div>
-								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
+								<iframe src={facebookLink} style={facebookCss}></iframe>								
 								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
 							</div>	
-							<div>{titlesView}</div>
+							<div style={titlesViewCss}>{titlesView}</div>
 						</div>;
 		}
 				
 		return(
-			<table>
+			<table style={bodyCss}>
 				<tbody><tr>
-					<td>
+					<td style={asideListCss}>
 						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
-						<button onClick={this.createPlaylist}>New</button>
+						<button onClick={this.createPlaylist} style={buttonCss}>New</button>
+						
 						<ul style={listCss}>
 						{this.props.playlists.map(function(list)
 						{
@@ -286,7 +321,9 @@ var MasterDetailView = React.createClass(
 						}, this)}
 						</ul>
 					</td>
-					<td>{detailView}</td>
+					
+					<td style={detailViewCss}>{detailView}</td>
+					
 				</tr></tbody>
 			</table>
 		);

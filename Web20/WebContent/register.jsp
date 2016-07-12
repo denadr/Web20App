@@ -28,7 +28,7 @@
 		<input class="inputfield" type="password" name="pw" /><br>
 		</div>
 		
-		<input class="submit" type="submit" name="submit" value="Sign up" />
+		<input class="submit" type="submit" name="submit" value="Register" />
 	</form>
 	
 	</div>

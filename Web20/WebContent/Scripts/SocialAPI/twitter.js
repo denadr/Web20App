@@ -1,7 +1,5 @@
 function init_twitter(doc, src, id)
 {
-	console.log('init_twitter()');
-  	
 	var js;
 	var fjs = doc.getElementsByTagName(src)[0];
     var twitter = window.twttr || {};
