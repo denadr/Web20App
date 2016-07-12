@@ -66,6 +66,14 @@ function getPlaylistsDeep(userId, callback)
 	});
 }
 
+function getPlaylist(playlistId, callback)
+{
+	request('playlist/getsinlge/' + playlistId, function (dbResponse)
+	{
+		callback(dbResponse.playlist);
+	});
+}
+
 //===== Title requests =====
 
 function addTitle(listId, descr, uri, callback)
