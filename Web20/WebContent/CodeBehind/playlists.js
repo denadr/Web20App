@@ -224,7 +224,34 @@ var MasterDetailView = React.createClass(
 		
 		var listCss =
 		{
-			listStyleType : 'none'
+			listStyleType : 'none',
+		};
+		
+		var listElemCss =
+		{
+				
+		};
+		
+		var asideListCss =
+		{
+			
+		};
+		
+		var detailViewCss =
+		{
+			margin: '50px',
+			padding: '5%',
+			width: '70%',
+		    
+		    background: '#2b303b',
+		    borderWidth: '0',
+			borderRadius: '10px'
+		};
+		
+		var titlesViewCss =
+		{
+			textAlign: 'center',
+			verticalAlign: 'middle'
 		};
 		
 		var facebookCss =
@@ -265,28 +292,31 @@ var MasterDetailView = React.createClass(
 								<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" style={facebookCss}></iframe>								
 								<a className="twitter-share-button" href={twitterLink} ref="share" data-url={shareLink}>Tweet</a>
 							</div>	
-							<div>{titlesView}</div>
+							<div style={titlesViewCss}>{titlesView}</div>
 						</div>;
 		}
 				
 		return(
 			<table>
 				<tbody><tr>
-					<td>
+					<td style={asideListCss}>
 						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
 						<button onClick={this.createPlaylist}>New</button>
+						
 						<ul style={listCss}>
 						{this.props.playlists.map(function(list)
 						{
 							return(
-								<li key={list.id}>
+								<li key={list.id} style={listElemCss}>
 									<a onClick={this.open.bind(this, list.id)}>{list.name}</a>
 								</li>
 							);
 						}, this)}
 						</ul>
 					</td>
-					<td>{detailView}</td>
+					
+					<td style={detailViewCss}>{detailView}</td>
+					
 				</tr></tbody>
 			</table>
 		);
