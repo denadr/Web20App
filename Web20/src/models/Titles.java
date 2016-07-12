@@ -13,7 +13,7 @@ public class Titles extends ArrayList<Title>
 		Gson gson = new Gson();
 		int elements = this.size();
 		
-		String json = "{ \"titles\" : [ ";
+		String json = "\"titles\" : [ ";
 		for (int n = 0; n < elements; n++)
 		{
 			json += gson.toJson(this.get(n));
@@ -22,6 +22,6 @@ public class Titles extends ArrayList<Title>
 				json += ",";
 			}
 		}
-		return json + " ] }";
+		return json + " ]";
 	}
 }

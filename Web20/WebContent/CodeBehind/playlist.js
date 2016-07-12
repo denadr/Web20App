@@ -7,7 +7,8 @@ $(document).ready(function ()
 		console.log('Logged in: ' + userName + ' (' + userId + ')');
 		
 		$('#menu_button').val(userName);
-		$('#menu_flyout').html('<li><a href="account.jsp">Account</a></li>' +
+		$('#menu_flyout').html('<li><a href="playlists.html">Playlists</a></li>' +
+							   '<li><a href="account.jsp">Account</a></li>' +
 							   '<li><a href="search.html" id="signout_button">Sign out</a></li>');
 		document.getElementById('signout_button').addEventListener('click', function()
 		{
@@ -29,7 +30,7 @@ $(document).ready(function ()
 	{
 		getPlaylist(playlistId, function(list)
 		{
-			console.log(list.name + ' (' + list.id + '): ' + JSON.stringify(list.titles));
+			console.log(list.name + ': ' + JSON.stringify(list.titles));
 			
 			ReactDOM.render(<PlaylistView playlist={list} ></PlaylistView>, document.getElementById('playlist_view'));
 		});

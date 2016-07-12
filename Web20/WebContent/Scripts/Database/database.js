@@ -67,8 +67,8 @@ function getPlaylistsDeep(userId, callback)
 }
 
 function getPlaylist(playlistId, callback)
-{
-	request('playlist/getsinlge/' + playlistId, function (dbResponse)
+{	
+	request('user/login/' + playlistId + '/sth', function (dbResponse)
 	{
 		callback(dbResponse.playlist);
 	});

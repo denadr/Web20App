@@ -93,31 +93,68 @@ public class DatabaseService
 		return result + "\"}";
 	}
 
+//	@GET
+//	@Path("/user/login/{username}/{password}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String login(@PathParam("username") String username, @PathParam("password") String password)
+//	{ // This function will be deleted.
+//		Database database = null;
+//		User user = null;
+//		String result = "{\"message\":\"failed\"}";
+//		try
+//		{
+//			database = new Database();
+//			user = database.login(username, password);
+//			if (user != null)
+//			{
+//				result = "{ \"user\" : " + (new Gson()).toJson(user) + " }";
+//			}
+//		}
+//		catch (ClassNotFoundException e) // Java driver for SQL not found.
+//		{
+//			result = "{\"message\":\"ClassNotFoundException\"}";
+//		}
+//		catch (SQLException e) // Some exception while accessing the SQL database.
+//		{
+//			result = "{\"message\":\"SQLException\"}";
+//		}
+//		finally
+//		{
+//			if (database != null)
+//			{
+//				database.close();
+//			}
+//		}
+//		return result;
+//	}
+	
 	@GET
 	@Path("/user/login/{username}/{password}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String login(@PathParam("username") String username, @PathParam("password") String password)
-	{ // This function will be deleted.
+	public String login(@PathParam("username") String playlistId, @PathParam("password") String password)
+	{
 		Database database = null;
-		User user = null;
-		String result = "{\"message\":\"failed\"}";
+		String result = "{\"message\":\"failure\"}";
 		try
 		{
 			database = new Database();
-			user = database.login(username, password);
-			if (user != null)
-			{
-				result = "{ \"user\" : " + (new Gson()).toJson(user) + " }";
-			}
-		}
+			result = database.getPlaylistAsJson(Integer.parseInt(playlistId));
+        } 
 		catch (ClassNotFoundException e) // Java driver for SQL not found.
 		{
+			// TODO: Detailed error handling
 			result = "{\"message\":\"ClassNotFoundException\"}";
-		}
+        } 
+		catch (NumberFormatException e) // Parsing of playlistId failed.
+		{
+			// TODO: Detailed error handling
+			result = "{\"message\":\"NumberFormatException\"}";
+        }
 		catch (SQLException e) // Some exception while accessing the SQL database.
 		{
+			// TODO: Detailed error handling
 			result = "{\"message\":\"SQLException\"}";
-		}
+        }
 		finally
 		{
 			if (database != null)
@@ -322,9 +359,9 @@ public class DatabaseService
 	}
 
 //	@GET
-//	@Path("/playlist/get/{playlistId}")
+//	@Path("/playlist/getsingle/{playlistId}")
 //	@Produces(MediaType.APPLICATION_JSON)
-//	public String getPlaylist(@PathParam("playlistId") String playlistId)
+//	public String getSinglePlaylist(@PathParam("playlistId") String playlistId)
 //	{
 //		Database database = null;
 //		String result = "{\"message\":\"failure\"}";
