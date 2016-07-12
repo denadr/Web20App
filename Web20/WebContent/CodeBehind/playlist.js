@@ -24,8 +24,8 @@ $(document).ready(function ()
     						   '<li><a href="register.jsp">Sign up</a></li>');
 	}
 
-	// TODO
-	var playlistId = 30;
+	var playlistId = window.location.search.split('=')[1]; // .../playlist.html?id=XXX
+	console.log('Loading playlist with ID: ' + playlistId);
 	$.getScript('/Web20/Scripts/Database/database.js', function()
 	{
 		getPlaylist(playlistId, function(list)
