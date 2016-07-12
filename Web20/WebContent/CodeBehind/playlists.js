@@ -16,7 +16,7 @@ $(document).ready(function ()
 			localStorage.setItem('username', null);
 		});
 		
-		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
+		//$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
