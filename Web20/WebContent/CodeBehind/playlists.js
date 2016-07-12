@@ -7,7 +7,7 @@ $(document).ready(function ()
 	if (userId != null && userId != 'null')
 	{
 		var userName = localStorage.getItem('username');
-		console.log('Logged in: ' + userName + ' (' + userId + ')');
+		//console.log('Logged in: ' + userName + ' (' + userId + ')');
 		
 		$('#menu_button').val(userName);
 		document.getElementById('signout_button').addEventListener('click', function()
@@ -16,14 +16,7 @@ $(document).ready(function ()
 			localStorage.setItem('username', null);
 		});
 		
-		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function()
-		{
-			console.log('Loaded local facebook.js.');	
-		});
-		$.getScript('/Web20/Scripts/SocialAPI/twitter.js', function()
-		{
-			console.log('Loaded local twitter.js.');
-		});
+		$.getScript('/Web20/Scripts/SocialAPI/facebook.js', function () { /*console.log('Loaded local facebook.js.');*/ });
 		
 		$.getScript('/Web20/Scripts/Database/database.js', function()
 		{
@@ -41,7 +34,7 @@ $(document).ready(function ()
 	}
 	else // This should not happen.
 	{
-		console.log('Not logged in.');
+		//console.log('Not logged in.');
 	}
 });
 
@@ -259,9 +252,10 @@ var MasterDetailView = React.createClass(
 							<button onClick={this.removePlaylist.bind(this, this.props.playlists[playlistIndex].id)}>Delete</button>
 							<div>
 								<button style={buttonCss} onClick={this.dropDown}>Share</button>
+								<a className="twitter-share-button" href="https://twitter.com/share?text=PlaylistName" data-url="https://localhost:8443/Web20/playlist.html?id=">Tweet</a>
 								<div style={contentCss}>
 									<a style={optionCss} onClick={this.shareFacebook.bind(this, this.props.playlists[playlistIndex].id)}>Facebook</a>
-									<a style={optionCss} onClick={this.shareTwitter.bind(this, this.props.playlists[playlistIndex].id)}>Twitter</a>
+									
 								</div>
 							</div>	
 							<div>{titlesView}</div>
@@ -270,7 +264,7 @@ var MasterDetailView = React.createClass(
 				
 		return(
 			<table>
-				<tr>
+				<tbody><tr>
 					<td>
 						<input type="text" id="newPlaylistName" placeholder="Playlist name..."></input>
 						<button onClick={this.createPlaylist}>New</button>
@@ -286,7 +280,7 @@ var MasterDetailView = React.createClass(
 						</ul>
 					</td>
 					<td>{detailView}</td>
-				</tr>
+				</tr></tbody>
 			</table>
 		);
 	}

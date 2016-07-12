@@ -1,78 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<title>Moogle Social API</title>
+<meta charset="UTF-8" />
+<title>Social API</title>
 </head>
 <body>
 
-<form action="demo_form.asp">
-   Input text to share: <input type="text" name="fname"><br>
-   <input type="submit" value="Submit">
-</form>
+<script src="twitter.js"></script>
+<a class="twitter-share-button" href="https://twitter.com/share?text=PlaylistName" data-url="https://localhost:8443/Web20/playlist.html?id=">Tweet</a>
 
-
-<script src="twitter.js"></script> 
-<a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="moogle">Tweet</a>
-<script> tweetCurrentPage();
-</script> 
-
-
-<!-- set up Twitter Widgets for Websites, described in
-https://dev.twitter.com/web/javascript/loading
--->
-<script>window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
- 
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
- 
-  return t;
-}(document, "script", "twitter-wjs"));
-</script>
-<!-- load Twitter widget dynamically, if the page changes 
-https://dev.twitter.com/web/javascript/initialization
-<script> twttr.widgets.load()</script>
--->
-<!--  alternative solution, updates the HTML document and gets the 
-playlist name for the tweet from the top URL --> 
-<!--  
-<script type="text/javascript">
-/*TWEET BUTTON BEGIN*/document.write('<a href="https://twitter.com/share" class="twitter-share-button" data-url="'+window.top.document.URL + '" data-hashtags="moogle" data-lang="de">Tweet</a>');/*TWEET BUTTON END*/
-</script>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
--->
-<script>
-var twitterHandle = 'moogle';
-
-function tweetCurrentPage() {
-    window.open('https://twitter.com/share?url='+escape(window.location.href)+'&text='+document.title + ' via @' + twitterHandle, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-    return false; 
-}
-</script>
-
-<!-- preferable, not yet working solution with javascript factory
-https://dev.twitter.com/web/javascript/creating-widgets
-
-<p id="tweet-container"></p>
-twttr.widgets.createShareButton(
-  'https://dev.twitter.com/',
-  document.getElementById('container'),
-  {
-    text: 'Hello World'
-  }
-);
--->
-
-<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" width="60" height="20" style="border:none;overflow:hidden"  ></iframe>
+<iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&mobile_iframe=true&width=60&height=20&appId" 
+		width="60" height="20" style="border:none;overflow:hidden"></iframe>
 
 </body>
 </html>
